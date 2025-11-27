@@ -8,6 +8,8 @@
   const modeToggle = $('#modeToggle');
   const navToggle = $('#navToggle');
   const navMenu = $('#navMenu');
+  const assistantBubble = $('#assistantBubble');
+  const heartSticker = document.querySelector('.sticker.heart');
 
   let updateSkyMode = () => {};
   let refreshSkyPalette = () => {};
@@ -50,6 +52,120 @@
     const next = currentMode === 'light' ? 'dark' : 'light';
     setMode(next, { animate: true });
   });
+
+  const clamp = (value, min, max) => Math.min(Math.max(value, min), max);
+
+  const edgeBounds = { top: 12, bottom: 12, left: 12, right: 12 };
+
+  const positionToggle = (x, y) => {
+    if (!modeToggle) return;
+    modeToggle.style.top = `${y}px`;
+    modeToggle.style.left = `${x}px`;
+  };
+
+  const snapToggleToEdge = (clientX, clientY) => {
+    if (!modeToggle) return;
+    const rect = modeToggle.getBoundingClientRect();
+    const width = rect.width;
+    const height = rect.height;
+    const vw = window.innerWidth;
+    const vh = window.innerHeight;
+
+    const distances = [
+      { edge: 'left', value: clientX - edgeBounds.left },
+      { edge: 'right', value: vw - (clientX + width) - edgeBounds.right },
+      { edge: 'top', value: clientY - edgeBounds.top },
+      { edge: 'bottom', value: vh - (clientY + height) - edgeBounds.bottom },
+    ];
+
+    distances.sort((a, b) => a.value - b.value);
+    const nearest = distances[0]?.edge || 'left';
+
+    let top = clamp(clientY, edgeBounds.top, vh - height - edgeBounds.bottom);
+    let left = clamp(clientX, edgeBounds.left, vw - width - edgeBounds.right);
+
+    if (nearest === 'left') left = edgeBounds.left;
+    if (nearest === 'right') left = vw - width - edgeBounds.right;
+    if (nearest === 'top') top = edgeBounds.top;
+    if (nearest === 'bottom') top = vh - height - edgeBounds.bottom;
+
+    positionToggle(left, top);
+  };
+
+  let isDraggingToggle = false;
+  let dragOffsetX = 0;
+  let dragOffsetY = 0;
+
+  const startToggleDrag = (e) => {
+    if (!modeToggle) return;
+    isDraggingToggle = true;
+    const rect = modeToggle.getBoundingClientRect();
+    dragOffsetX = (e.touches?.[0]?.clientX || e.clientX) - rect.left;
+    dragOffsetY = (e.touches?.[0]?.clientY || e.clientY) - rect.top;
+    modeToggle.classList.add('mode-toggle--dragging');
+  };
+
+  const duringToggleDrag = (e) => {
+    if (!isDraggingToggle || !modeToggle) return;
+    e.preventDefault();
+    const clientX = (e.touches?.[0]?.clientX || e.clientX) - dragOffsetX;
+    const clientY = (e.touches?.[0]?.clientY || e.clientY) - dragOffsetY;
+    const rect = modeToggle.getBoundingClientRect();
+    const width = rect.width;
+    const height = rect.height;
+    const left = clamp(clientX, edgeBounds.left, window.innerWidth - width - edgeBounds.right);
+    const top = clamp(clientY, edgeBounds.top, window.innerHeight - height - edgeBounds.bottom);
+    positionToggle(left, top);
+  };
+
+  const endToggleDrag = (e) => {
+    if (!isDraggingToggle) return;
+    isDraggingToggle = false;
+    modeToggle?.classList.remove('mode-toggle--dragging');
+    const clientX = (e.changedTouches?.[0]?.clientX || e.clientX) - dragOffsetX;
+    const clientY = (e.changedTouches?.[0]?.clientY || e.clientY) - dragOffsetY;
+    snapToggleToEdge(clientX, clientY);
+  };
+
+  modeToggle?.addEventListener('mousedown', startToggleDrag);
+  modeToggle?.addEventListener('touchstart', startToggleDrag, { passive: false });
+  window.addEventListener('mousemove', duringToggleDrag);
+  window.addEventListener('touchmove', duringToggleDrag, { passive: false });
+  window.addEventListener('mouseup', endToggleDrag);
+  window.addEventListener('touchend', endToggleDrag);
+
+  const scrollHideTargets = [
+    { el: modeToggle, mq: '(max-width: 768px)' },
+    { el: assistantBubble, mq: '(max-width: 768px)' },
+    { el: heartSticker, mq: '(max-width: 768px)' },
+  ];
+  const scrollHideTimers = new WeakMap();
+
+  const handleScrollHide = () => {
+    scrollHideTargets.forEach(({ el, mq }) => {
+      if (!el) return;
+      if (!window.matchMedia(mq).matches) return;
+      el.classList.add('is-hidden');
+      const existing = scrollHideTimers.get(el);
+      if (existing) clearTimeout(existing);
+      const timer = setTimeout(() => el.classList.remove('is-hidden'), 650);
+      scrollHideTimers.set(el, timer);
+    });
+  };
+
+  const releaseScrollHidden = () => {
+    scrollHideTargets.forEach(({ el, mq }) => {
+      if (!el) return;
+      if (window.matchMedia(mq).matches) return;
+      el.classList.remove('is-hidden');
+      const existing = scrollHideTimers.get(el);
+      if (existing) clearTimeout(existing);
+    });
+  };
+
+  window.addEventListener('scroll', handleScrollHide, { passive: true });
+  window.addEventListener('resize', releaseScrollHidden);
+  releaseScrollHidden();
 
   const setNavState = (isOpen) => {
     if (!navMenu || !navToggle) return;
@@ -776,7 +892,6 @@
   }
 
     // Assistant bubble helps folks pick a project
-  const assistantBubble = $('#assistantBubble');
   const assistantPanel = $('#assistantPanel');
   const assistantRandom = $('#assistantRandom');
 

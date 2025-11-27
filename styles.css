@@ -73,6 +73,30 @@ body {
     radial-gradient(900px 600px at 90% 0%, color-mix(in oklab, var(--p3) 30%, #ffffff), transparent 65%),
     radial-gradient(1300px 900px at 50% 120%, color-mix(in oklab, var(--p1) 18%, #ffffff), transparent 80%);
 }
+.theme-sakura {
+  background-image:
+    radial-gradient(900px 520px at 20% -10%, rgba(255, 120, 176, 0.65), transparent 60%),
+    radial-gradient(700px 520px at 80% 10%, rgba(255, 205, 220, 0.35), transparent 65%),
+    radial-gradient(1200px 680px at 50% 110%, rgba(161, 255, 224, 0.25), transparent 75%);
+}
+.mode-light.theme-sakura {
+  background-image:
+    radial-gradient(1000px 520px at 10% 0%, rgba(255, 178, 206, 0.75), transparent 70%),
+    radial-gradient(900px 520px at 88% 12%, rgba(255, 233, 238, 0.8), transparent 70%),
+    radial-gradient(1200px 820px at 55% 120%, rgba(201, 255, 230, 0.45), transparent 80%);
+}
+.theme-isla {
+  background-image:
+    radial-gradient(940px 560px at 15% -5%, rgba(68, 175, 160, 0.55), transparent 65%),
+    radial-gradient(800px 520px at 80% 5%, rgba(255, 184, 120, 0.35), transparent 70%),
+    radial-gradient(1200px 760px at 45% 115%, rgba(139, 220, 204, 0.35), transparent 80%);
+}
+.mode-light.theme-isla {
+  background-image:
+    radial-gradient(900px 520px at 12% 5%, rgba(255, 224, 170, 0.8), transparent 70%),
+    radial-gradient(900px 520px at 78% -5%, rgba(139, 220, 204, 0.6), transparent 70%),
+    radial-gradient(1200px 880px at 45% 125%, rgba(255, 196, 212, 0.4), transparent 85%);
+}
 
 /* Glass utility class I slap on almost everything */
 .glass {
@@ -129,8 +153,12 @@ body {
 
 /* Floating stickers = purely for joy */
 .sticker { position: fixed; z-index: 2; font-size: 28px; opacity:.8; user-select:none; pointer-events:none; }
-.sticker.heart { top: 90px; right: 22px; transform: rotate(-12deg); }
+.sticker.heart { top: 90px; right: 22px; transform: rotate(-12deg); transition: opacity 0.45s ease, transform 0.45s ease; }
 .sticker.star  { top: 110px; left: 24px;  transform: none; }
+.sticker.heart.is-hidden{
+  opacity:0;
+  transform: translateY(-10px) scale(.9);
+}
 
 /* Static SVG doodles so the layout never feels flat */
 .decor {
@@ -249,7 +277,8 @@ body {
   transition:
     background 0.35s ease,
     border-color 0.35s ease,
-    transform 0.25s ease;
+    transform 0.25s ease,
+    opacity 0.35s ease;
 }
 .mode-toggle:focus-visible{ outline:2px solid var(--accent); outline-offset:4px; }
 .mode-toggle:hover{ transform: translateY(-2px); }
@@ -257,6 +286,11 @@ body {
   font-size:24px;
   transition: opacity 0.35s ease, transform 0.35s ease;
   position:absolute;
+}
+.mode-toggle.is-hidden{
+  opacity:0;
+  transform: translateY(8px) scale(.96);
+  pointer-events:none;
 }
 .mode-toggle__icon--sun{ opacity:0; transform: scale(.7); color:#f9b84f; }
 .mode-toggle__icon--moon{ opacity:1; transform: scale(1); }
@@ -568,6 +602,12 @@ body {
   background: rgba(12, 16, 32, 0.78);
   cursor: pointer;
   z-index: 15;
+  transition: opacity 0.4s ease, transform 0.4s ease;
+}
+.assistant-bubble.is-hidden{
+  opacity:0;
+  transform: translateY(12px) scale(.94);
+  pointer-events:none;
 }
 .assistant-panel {
   position: fixed;
@@ -636,3 +676,98 @@ textarea{ min-height:120px; }
   color:var(--fg); background: transparent; border:1px solid var(--border);
 }
 .hidden{ display:none; }
+
+@media (max-width: 900px){
+  .hero{ padding:64px 16px 32px; }
+  .section{ padding:56px 16px; }
+  .hero-grid{ grid-template-columns:1fr; }
+  .headline{ font-size: clamp(32px, 7vw, 48px); }
+}
+
+@media (max-width: 768px){
+  .mode-toggle{ width:48px; height:48px; border-radius:16px; }
+  .mode-toggle__icon{ font-size:20px; }
+  .mode-toggle{ top: 12px; left: 12px; }
+  body{ padding:0 12px; font-size:15px; }
+  .nav{ margin:10px 0 6px; padding:12px; width:100%; }
+  .nav .nav-menu{ width:100%; }
+  .brand{ font-size:20px; }
+  .palette .chip{ padding:5px 10px; font-size:12px; }
+  .hero{ padding:58px 8px 30px; margin:0; }
+  .hero-inner{ gap:18px; padding:0 8px; }
+  .hero-grid .polaroid{ order:1; margin:0 auto 14px; width:min(240px, 70vw); padding:10px; }
+  .hero-grid .polaroid img{ max-height:50vh; }
+  .hero-grid .hero-copy{ order:2; }
+  .polaroid img{ max-height:55vh; object-fit:cover; border-radius:10px; }
+  .polaroid figcaption{ font-size:13px; }
+  .badge{ font-size:12px; }
+  .headline{ font-size: clamp(30px, 7.4vw, 44px); }
+  .subheadline{ font-size:15px; }
+  .tagline{ font-size:14px; }
+  .hero-actions .btn{ padding:10px 14px; font-size:14px; }
+  .chips{ flex-wrap:wrap; gap:6px; }
+  .polaroid{ width: min(240px, 72%); }
+  .section{ padding:46px 8px; }
+  .section-head{ padding:0 10px; }
+  .section-head h2{ font-size:24px; }
+  .card{ padding:14px 16px; }
+  .card h3{ font-size:18px; }
+  .card p{ line-height:1.55; }
+  .skills-wrap,
+  .grid.two,
+  .wins-grid,
+  .project-grid{ gap:14px; }
+  .project-grid{ grid-template-columns:1fr; }
+  .project-stories,
+  .tools-grid,
+  .project-filters{ padding:0 6px; }
+  .contact{ padding:0 8px; }
+  .btn{ padding:10px 14px; font-size:14px; }
+  .footer{ flex-direction:column; text-align:center; padding:14px; margin:16px 0 8px; }
+}
+
+@media (max-width: 480px){
+  body{ font-size:14px; padding:0 10px; }
+  .nav{ padding:8px 10px; margin:6px 0; }
+  .brand{ font-size:18px; }
+  .palette .chip{ font-size:11px; }
+  .nav .nav-menu a{ font-size:14px; }
+  .hero{ padding:38px 0 18px; }
+  .hero-inner{ gap:12px; padding:0 4px; }
+  .hero-grid .polaroid{ width:min(210px, 72vw); padding:8px; }
+  .polaroid{ width: min(180px, 70%); }
+  .polaroid img{ max-height:45vh; }
+  .polaroid figcaption{ font-size:12px; }
+  .headline{ font-size: clamp(24px, 8.4vw, 32px); }
+  .subheadline{ font-size:13px; }
+  .tagline{ font-size:12px; }
+  .badge{ font-size:11px; }
+  .hero-actions{ display:flex; flex-direction:column; gap:8px; }
+  .hero-actions .btn{ width:100%; text-align:center; padding:9px 12px; font-size:13px; }
+  .chips{ justify-content:center; gap:6px; }
+  .section{ padding:34px 0; }
+  .section-head h2{ font-size:22px; }
+  .card{ padding:12px 14px; }
+  .timeline li{ padding:8px 0 8px 26px; }
+  .experience p,
+  .wins-grid article p,
+  .card p{ font-size:14px; }
+  .project-filters{ padding:0; }
+  #projectSearch{ font-size:13px; }
+  .btn{ padding:9px 12px; font-size:13px; }
+  .btn.small,
+  .btn.outline.small{ padding:8px 10px; font-size:12px; }
+  .footer{ padding:12px; }
+  .dock{ bottom:12px; }
+  .dock-btn{ width:34px; height:34px; font-size:18px; }
+}
+
+@media (max-width: 380px){
+  body{ padding:0 6px; }
+  .nav{ flex-direction:column; align-items:flex-start; padding:8px; }
+  .hero{ padding:34px 0 18px; }
+  .headline{ font-size:24px; }
+  .subheadline{ font-size:12px; }
+  .tagline{ font-size:11px; }
+  .hero-actions .btn{ font-size:12px; }
+}
