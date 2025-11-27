@@ -6,6 +6,8 @@
   const $$ = (s, c = document) => Array.from(c.querySelectorAll(s));
   const bodyEl = document.body;
   const modeToggle = $('#modeToggle');
+  const navToggle = $('#navToggle');
+  const navMenu = $('#navMenu');
 
   let updateSkyMode = () => {};
   let refreshSkyPalette = () => {};
@@ -47,6 +49,27 @@
   modeToggle?.addEventListener('click', () => {
     const next = currentMode === 'light' ? 'dark' : 'light';
     setMode(next, { animate: true });
+  });
+
+  const setNavState = (isOpen) => {
+    if (!navMenu || !navToggle) return;
+    navMenu.classList.toggle('open', isOpen);
+    navToggle.classList.toggle('is-open', isOpen);
+    navToggle.setAttribute('aria-expanded', String(isOpen));
+  };
+  navToggle?.addEventListener('click', () => {
+    const isOpen = !navMenu.classList.contains('open');
+    setNavState(isOpen);
+  });
+  navMenu?.addEventListener('click', (e) => {
+    if (window.matchMedia('(max-width: 900px)').matches && e.target.closest('a')) {
+      setNavState(false);
+    }
+  });
+  window.addEventListener('resize', () => {
+    if (!window.matchMedia('(max-width: 900px)').matches) {
+      setNavState(false);
+    }
   });
 
   // Typewriter intro so my name gently types itself out
@@ -629,10 +652,50 @@
 
   // Contact form demo — no backend yet, just friendly feedback
   const form = $('#contactForm'), msg = $('#formMsg'), send = $('#sendBtn');
-  send?.addEventListener('click', () => {
-    const name = $('#name').value.trim(), email = $('#email').value.trim(), message = $('#message').value.trim();
-    if (!name || !email || !message) { msg.textContent = 'Please fill in all fields.'; return; }
-    msg.textContent = 'Thanks! I’ll reply shortly.'; form.reset(); setTimeout(()=>msg.textContent='', 3500);
+  const FORM_ENDPOINT = 'https://formsubmit.co/ajax/antonettepetallo73@gmail.com';
+  send?.addEventListener('click', async () => {
+    if (!form) return;
+    const name = $('#name')?.value.trim();
+    const email = $('#email')?.value.trim();
+    const message = $('#message')?.value.trim();
+
+    if (!name || !email || !message) {
+      msg.textContent = 'Please fill in all fields.';
+      return;
+    }
+
+    send.disabled = true;
+    send.textContent = 'Sending…';
+    msg.textContent = 'Sending your note…';
+
+    try {
+      const response = await fetch(FORM_ENDPOINT, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          Accept: 'application/json',
+        },
+        body: JSON.stringify({
+          name,
+          email,
+          message,
+          _subject: 'New portfolio inquiry',
+          _captcha: 'false',
+        }),
+      });
+
+      if (!response.ok) throw new Error('Network response was not ok');
+
+      msg.textContent = 'Thanks! Your message is on its way to my inbox.';
+      form.reset();
+    } catch (error) {
+      console.error(error);
+      msg.textContent = 'Something went wrong. Please try again or email me directly.';
+    } finally {
+      send.disabled = false;
+      send.textContent = 'Send';
+      setTimeout(() => (msg.textContent = ''), 5000);
+    }
   });
 
     // Support Tools: password strength helper copy

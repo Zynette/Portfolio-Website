@@ -155,6 +155,7 @@ body {
   position: sticky; top:0; z-index: 10;
   display:flex; align-items:center; justify-content:space-between;
   gap:12px; padding:12px 20px; margin:12px;
+  flex-wrap:wrap;
 }
 .brand { text-decoration:none; color:var(--fg); font-weight:800; letter-spacing:.4px; }
 .brand .mark{
@@ -166,9 +167,68 @@ body {
 .blink { animation: blink 1.2s step-end infinite; }
 @keyframes blink { 50% { opacity: 0; } }
 
-.nav nav { display:flex; flex-wrap:wrap; align-items:center; gap:12px; }
-.nav nav a { color:var(--fg); text-decoration:none; font-size:14px; opacity:.92; }
-.nav nav a:hover{ color:var(--accent); }
+.nav .nav-menu { display:flex; flex-wrap:wrap; align-items:center; gap:12px; }
+.nav .nav-menu a { color:var(--fg); text-decoration:none; font-size:14px; opacity:.92; }
+.nav .nav-menu a:hover{ color:var(--accent); }
+
+.nav-toggle{
+  display:none;
+  border:none;
+  background:color-mix(in oklab, var(--card) 80%, rgba(255,255,255,0.08));
+  border-radius:12px;
+  padding:8px;
+  cursor:pointer;
+  align-items:center;
+  justify-content:center;
+  flex-direction:column;
+  gap:4px;
+}
+.nav-toggle__bar{
+  width:22px;
+  height:2px;
+  border-radius:999px;
+  background:var(--fg);
+  transition:transform .25s ease, opacity .25s ease;
+}
+.nav-toggle:focus-visible{ outline:2px solid var(--accent); outline-offset:4px; }
+.nav-toggle.is-open .nav-toggle__bar:nth-child(1){
+  transform: translateY(6px) rotate(45deg);
+}
+.nav-toggle.is-open .nav-toggle__bar:nth-child(2){
+  opacity:0;
+}
+.nav-toggle.is-open .nav-toggle__bar:nth-child(3){
+  transform: translateY(-6px) rotate(-45deg);
+}
+
+@media (max-width: 900px){
+  .nav {
+    padding:10px 16px;
+  }
+  .nav .nav-menu {
+    width:100%;
+    flex-direction:column;
+    align-items:flex-start;
+    gap:8px;
+    margin-top:8px;
+    display:none;
+  }
+  .nav .nav-menu.open {
+    display:flex;
+  }
+  .nav .palette {
+    width:100%;
+  }
+  .nav-toggle{
+    display:flex;
+  }
+  .nav .nav-menu a{
+    font-size:15px;
+  }
+  .nav .palette{
+    justify-content:flex-start;
+  }
+}
 
 .mode-toggle{
   position:fixed;
