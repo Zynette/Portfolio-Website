@@ -1,0 +1,988 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Antonette Petallo — IT Support Analyst • Web</title>
+    <meta
+      name="description"
+      content="Antonette Petallo — IT Support Analyst & Technical Specialist. Portfolio, projects, case studies, and contact."
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:wght@500;700&family=Kalam:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+
+  <body class="theme-aurora mode-dark" id="top">
+    <!-- My starry canvas backdrop lives here -->
+    <canvas id="sky" aria-hidden="true"></canvas>
+
+    <!-- Sparkle layer so every click feels a little magical -->
+    <div id="sparkles" aria-hidden="true"></div>
+
+    <!-- Floating stickers that keep the playful vibe alive -->
+    <div class="sticker heart">✨</div>
+    <button
+      class="sticker star mode-toggle"
+      id="modeToggle"
+      type="button"
+      aria-label="Toggle light mode"
+      aria-pressed="false"
+    >
+      <span class="mode-toggle__icon mode-toggle__icon--moon">★</span>
+      <span class="mode-toggle__icon mode-toggle__icon--sun">☀</span>
+    </button>
+
+    <!-- Tropical doodles I added for a soft Filipino-inspired vibe -->
+    <svg
+      class="decor decor-leaf"
+      viewBox="0 0 120 120"
+      aria-hidden="true"
+      focusable="false"
+    >
+      <path
+        d="M20 110 C40 80, 60 60, 100 40"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="4"
+        stroke-linecap="round"
+      />
+    </svg>
+    <svg
+      class="decor decor-wave"
+      viewBox="0 0 160 80"
+      aria-hidden="true"
+      focusable="false"
+    >
+      <path
+        d="M0 50 Q40 20 80 50 T160 50"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="3"
+        stroke-linecap="round"
+      />
+    </svg>
+    <svg
+      class="decor decor-sun"
+      viewBox="0 0 100 50"
+      aria-hidden="true"
+      focusable="false"
+    >
+      <path
+        d="M0 50 A50 50 0 0 1 100 50"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="3"
+        stroke-linecap="round"
+      />
+    </svg>
+
+    <!-- Sticky nav so folks can zip around the page -->
+    <header class="nav glass">
+      <a href="#top" class="brand">
+        <span class="mark">A</span>ntonette<span class="blink">_</span>
+      </a>
+      <nav>
+        <a href="#about">About</a>
+        <a href="#skills">Skills</a>
+        <a href="#projects">Projects</a>
+        <a href="#experience">Experience</a>
+        <a href="#education">Education</a>
+        <a href="#contact">Collaborate</a>
+        <div class="palette">
+          <button class="chip" data-theme="theme-aurora" title="Aurora">
+            Aurora
+          </button>
+          <button class="chip" data-theme="theme-sakura" title="Sakura">
+            Sakura
+          </button>
+          <button class="chip" data-theme="theme-isla" title="Isla">
+            Isla
+          </button>
+        </div>
+      </nav>
+    </header>
+
+    <!-- Hero section: photo + the quick intro -->
+    <section class="hero">
+      <div class="hero-inner hero-grid">
+        <!-- Column A: my faux Polaroid moment -->
+        <figure class="polaroid glass reveal">
+          <img
+            src="https://picsum.photos/600/700?random=3"
+            alt="Antonette tech workspace mock photo"
+          />
+          <figcaption>
+            Hi, I’m Antonette! I keep systems & people happy.
+          </figcaption>
+        </figure>
+
+        <!-- Column B: where I talk through who I am -->
+        <div class="hero-copy">
+          <div class="badge">IT Support • Web • DB</div>
+          <h1 class="headline">
+            <span id="typewriter">Antonette Petallo_</span>
+          </h1>
+          <p class="subheadline">
+            IT Support Analyst & Technical Problem-Solver
+            <br />
+            <i>patient, resourceful, and obsessed with clarity.</i>
+          </p>
+          <p class="tagline">
+            I help people feel confident with their technology
+            <br />
+            <i>
+              whether that means fixing issues, simplifying processes, or
+              creating better workflows.
+            </i>
+          </p>
+
+          <div class="hero-actions">
+            <a
+              class="btn"
+              href="https://www.linkedin.com/in/antonette-petallo/"
+              target="_blank"
+              rel="noopener"
+              >LinkedIn</a
+            >
+            <a
+              class="btn secondary"
+              href="https://github.com/Zynette"
+              target="_blank"
+              rel="noopener"
+              >GitHub</a
+            >
+            <a
+              class="btn outline"
+              href="./Antonette_Petallo_ITSupport_Resume.pdf"
+              download
+              >Download Résumé</a
+            >
+          </div>
+
+          <div class="chips">
+            <span class="chip-pink">Support</span>
+            <span class="chip-blue">Develop</span>
+            <span class="chip-green">Innovate</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- About section: sharing the story behind the tech skills -->
+    <section id="about" class="section">
+      <header class="section-head">
+        <h2>Behind the Screens</h2>
+        <p class="accent-script">precision + empathy</p>
+      </header>
+
+      <div class="grid two">
+        <div class="card glass reveal">
+          <p>
+            My journey in IT started from a simple curiosity: why things break
+            and how to make them work better for people. Since then, I’ve built
+            a foundation that mixes technical support, customer experience, and
+            problem-solving across academic, enterprise, and small business
+            environments.
+          </p>
+          <p>
+            I’ve supported users at McMaster University’s UTS Service Desk,
+            contributed clearer documentation, resolved daily Windows/macOS
+            issues, and even built internal tools to make workflows easier. What
+            motivates me is simple... helping someone move from stressed to
+            relieved with a fix that actually makes sense.
+          </p>
+        </div>
+
+        <div class="card glass">
+          <ul class="timeline">
+            <li>
+              <span>2021–2023</span> BSIT – Business Analytics (Philippines)
+            </li>
+            <li>
+              <span>2023–2024</span> Admin & IT Support | Sun Life Canada, Roam
+              & Journey Travel
+            </li>
+            <li><span>2024–Now</span> McMaster UTS | Client Services</li>
+            <li>
+              <span>2025</span> Portfolio & project expansion: Support + Web +
+              DB
+            </li>
+            <li>
+              <span>Future</span> IT Specialist: automation, identity, and
+              service reliability
+            </li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- How I Work: the calm-support philosophy section -->
+    <section id="how-i-work" class="section">
+      <header class="section-head">
+        <h2>How I Work</h2>
+        <p class="accent-script">support that feels calm, clear, and human</p>
+      </header>
+
+      <div class="grid two">
+        <article class="card glass reveal">
+          <h3>🧭 Support philosophy</h3>
+          <ul>
+            <li>
+              <strong>Clarity first.</strong> I take time to understand the real
+              problem before giving any steps. Clear guidance beats rushed
+              fixes.
+            </li>
+            <li>
+              <strong>Stay calm, even when users aren’t.</strong> Tech issues
+              can be stressful — my job is to make the experience feel
+              manageable and respectful.
+            </li>
+            <li>
+              <strong>Think before escalating.</strong> I walk through common
+              fixes, validated steps, and past KB entries before moving a case
+              up.
+            </li>
+          </ul>
+        </article>
+
+        <article class="card glass reveal">
+          <h3>🗂️ Beyond “just closing tickets”</h3>
+          <ul>
+            <li>
+              <strong>Better documentation.</strong> I rewrite confusing fixes
+              into cleaner KB articles so the next analyst doesn’t start from
+              zero.
+            </li>
+            <li>
+              <strong>Workflow awareness.</strong> I look for patterns — what
+              keeps breaking, what slows users down, and what processes can be
+              simplified.
+            </li>
+            <li>
+              <strong>Follow-through matters.</strong> “Resolved” isn’t real
+              until the user confirms everything is working again.
+            </li>
+          </ul>
+        </article>
+      </div>
+    </section>
+
+    <!-- Skills overview with tools I reach for every day -->
+    <section id="skills" class="section">
+      <header class="section-head">
+        <h2>Skills & Tools</h2>
+        <p class="muted">
+          Hover for subtle motion • press 1–3 to play with themes.
+        </p>
+      </header>
+
+      <div class="skills-wrap">
+        <article class="skill-card glass reveal">
+          <h3>💻 Technical</h3>
+          <ul>
+            <li>
+              <strong>Languages:</strong> HTML, CSS, JavaScript, C#, Python
+              (basic), SQL
+            </li>
+            <li>
+              <strong>Frameworks & Tools:</strong> ASP.NET Core, VS Code, Visual
+              Studio, GitHub
+            </li>
+            <li><strong>Databases:</strong> MySQL, Firestore, SQLite</li>
+            <li><strong>Support Tools:</strong> Jira, ServiceNow, Comm100</li>
+          </ul>
+        </article>
+
+        <article class="skill-card glass reveal">
+          <h3>🧰 IT Support & Systems</h3>
+          <ul>
+            <li>Active Directory & Azure AD</li>
+            <li>VPN, MFA, and identity troubleshooting</li>
+            <li>Windows & macOS endpoint support</li>
+            <li>Ticketing systems (Jira, ServiceNow, Comm100)</li>
+          </ul>
+        </article>
+
+        <article class="skill-card glass reveal">
+          <h3>🎨 Productivity & Design</h3>
+          <ul>
+            <li>Figma, Canva, MS Project</li>
+            <li>Documentation: Confluence, SharePoint, Notion</li>
+          </ul>
+        </article>
+
+        <article class="skill-card glass reveal">
+          <h3>💡 Learning</h3>
+          <ul>
+            <li>Google IT Support (Coursera)</li>
+            <li>Networking, Database Theory, Web Apps, QA</li>
+          </ul>
+        </article>
+      </div>
+    </section>
+
+    <!-- Mini IT helpers I prototyped for fun -->
+    <section id="support-tools" class="section">
+      <header class="section-head">
+        <h2>Support Tools</h2>
+        <p class="muted">
+          Tiny helpers I’d reach for during a call — built with simple
+          JavaScript.
+        </p>
+      </header>
+
+      <div class="tools-grid">
+        <article class="card glass reveal">
+          <h3>🔐 Password strength check</h3>
+          <p class="muted">
+            I never ask for real passwords — but I can help users test stronger
+            patterns.
+          </p>
+          <input
+            id="pwInput"
+            type="password"
+            placeholder="Type a sample password pattern"
+          />
+          <p id="pwFeedback" class="muted small-text">
+            Waiting for you to type…
+          </p>
+        </article>
+
+        <article class="card glass reveal">
+          <h3>💻 What are you using?</h3>
+          <p class="muted">
+            Useful when a caller isn’t sure if they’re on Windows, macOS, or
+            something else.
+          </p>
+          <div id="osInfo" class="os-pill">Detecting your OS…</div>
+        </article>
+
+        <article class="card glass reveal">
+          <h3>📡 Friendly “ping” check</h3>
+          <p class="muted">
+            A playful mock ping test to explain latency in human language.
+          </p>
+          <button id="pingBtn" class="btn small" type="button">
+            Run ping test
+          </button>
+          <p id="pingStatus" class="muted small-text">
+            No ping yet — click the button.
+          </p>
+        </article>
+      </div>
+    </section>
+
+    <!-- Projects: demos + case studies with filters -->
+    <section id="projects" class="section">
+      <header class="section-head">
+        <h2>Projects & Demos</h2>
+        <p class="muted">
+          Switch view:
+          <button id="viewGrid" class="toggle on">Grid</button>
+          <button id="viewStories" class="toggle">Case Studies</button>
+        </p>
+
+        <!-- Search + filters so people can find the right project fast -->
+        <div class="project-filters">
+          <input
+            id="projectSearch"
+            type="search"
+            placeholder="Search by title, tools, or focus (e.g., 'VPN', 'Firebase', 'support')"
+          />
+          <div id="projectFilters" class="filter-chips">
+            <button class="chip small on" data-filter="all">All</button>
+            <button class="chip small" data-filter="IT Support">
+              IT Support
+            </button>
+            <button class="chip small" data-filter="Web">Web</button>
+            <button class="chip small" data-filter="Database">Database</button>
+            <button class="chip small" data-filter="Advanced">Advanced</button>
+          </div>
+        </div>
+      </header>
+
+      <div id="projectGrid" class="project-grid"></div>
+      <div id="projectStories" class="project-stories hidden"></div>
+    </section>
+
+    <!-- Wins section where I brag about real impact -->
+    <section id="wins" class="section">
+      <header class="section-head">
+        <h2>Wins I’m Proud Of</h2>
+        <p class="accent-script">small experiments → real impact</p>
+      </header>
+
+      <div class="wins-grid">
+        <article class="card glass reveal">
+          <h3>📈 35% more Dustless Living leads</h3>
+          <p class="muted">
+            Rebuilt my service website, refined messaging, and optimized ads...
+            resulting in a ~35% increase in qualified leads and clearer
+            expectations before booking.
+          </p>
+        </article>
+
+        <article class="card glass reveal">
+          <h3>🎧 20+ tickets/day with calm support</h3>
+          <p class="muted">
+            Resolved 20+ daily issues at McMaster UTS across VPN, MFA, device
+            configuration, and software installs — all while maintaining
+            accuracy and calm communication.
+          </p>
+        </article>
+
+        <article class="card glass reveal">
+          <h3>🧾 Cleaner documentation & KB</h3>
+          <p class="muted">
+            Turned scattered notes into clean SOPs and KB articles, helping
+            analysts (and future me) solve recurring issues faster.
+          </p>
+        </article>
+
+        <article class="card glass reveal">
+          <h3>🏅 Dean’s List & peer support</h3>
+          <p class="muted">
+            Earned Dean’s List in BSIT – Business Analytics. Also supported
+            classmates at Mohawk in SQL, networking, and HTML/CSS.
+          </p>
+        </article>
+      </div>
+    </section>
+
+    <!-- Experience timeline -->
+    <section id="experience" class="section">
+      <header class="section-head">
+        <h2>Hands-on Experience</h2>
+      </header>
+
+      <div class="experience">
+        <article class="xp card glass reveal">
+          <div class="xp-head">
+            <h3>🏛️ McMaster University — UTS Client Services</h3>
+            <span class="when">2025</span>
+          </div>
+          <p>
+            Delivered consistent phone/chat/Jira support — handling 20+ tickets
+            per day across Windows, macOS, VPN, MFA, SSO, and software
+            troubleshooting. Contributed to clearer documentation and improved
+            ticket accuracy.
+          </p>
+        </article>
+
+        <article class="xp card glass reveal">
+          <div class="xp-head">
+            <h3>💼 Dustless Living — Owner / IT & Ops</h3>
+            <span class="when">2024–Present</span>
+          </div>
+          <p>
+            Built and maintained a small-business tech setup: website, ads, CRM
+            tracking, Fongo VoIP routing, and light automation for scheduling
+            and invoicing.
+          </p>
+        </article>
+
+        <article class="xp card glass reveal">
+          <div class="xp-head">
+            <h3>🏢 Sun Life Insurance Canada — Administrative Assistant</h3>
+            <span class="when">2024</span>
+          </div>
+          <p>
+            Managed digital files, client data, and ServiceNow workflows while
+            ensuring accuracy, confidentiality, and strong organization.
+          </p>
+        </article>
+      </div>
+    </section>
+
+    <!-- Education + certificates split -->
+    <section id="education" class="section">
+      <header class="section-head">
+        <h2>Education & Certifications</h2>
+      </header>
+
+      <div class="grid two">
+        <div class="card glass reveal">
+          <h3>🎓 Education</h3>
+          <div class="edu-entry">
+            <strong>Mohawk College — Computer Systems Technician, Software Support</strong>
+            <span class="edu-note">(Expected Dec 2025)</span>
+            <p>
+              Focus: Networking, Security, Web Applications, Databases, IT Support.
+            </p>
+            <div class="edu-links">
+              <a
+                class="btn outline small"
+                href="https://www.mohawkcollege.ca/programs/technology/computer-systems-technician-software-support-559"
+                target="_blank"
+                rel="noopener"
+                >View Program Page</a
+              >
+              <a
+                class="btn outline small"
+                href="https://www.mohawkcollege.ca/programs/technology/computer-systems-technician-software-support-559/curriculum"
+                target="_blank"
+                rel="noopener"
+                >View Curriculum</a
+              >
+              <a
+                class="btn outline small"
+                href="https://www.mohawkcollege.ca/"
+                target="_blank"
+                rel="noopener"
+                >School Website</a
+              >
+            </div>
+          </div>
+          <div class="edu-entry">
+            <strong>Batangas State University — BSIT, Major in Business Analytics</strong>
+            <span class="edu-note">(Dean’s List)</span>
+            <div class="edu-links">
+              <a
+                class="btn outline small"
+                href="https://batstate-u.edu.ph/academic-programs/bs-information-technology/"
+                target="_blank"
+                rel="noopener"
+                >View Program Page</a
+              >
+              <a
+                class="btn outline small"
+                href="https://batstate-u.edu.ph/academic-programs/bs-information-technology/bsit-curriculum/"
+                target="_blank"
+                rel="noopener"
+                >View Curriculum</a
+              >
+              <a
+                class="btn outline small"
+                href="https://batstate-u.edu.ph/"
+                target="_blank"
+                rel="noopener"
+                >School Website</a
+              >
+            </div>
+          </div>
+        </div>
+        <div class="card glass reveal">
+          <h3>📜 Certificates & Courses</h3>
+          <div class="cert-entry">Generative AI Fundamentals — Databricks</div>
+          <div class="cert-entry">Google IT Support (Coursera)</div>
+          <div class="cert-entry">Customer Service Foundations</div>
+          <div class="cert-entry">IT Service Desk: Service Management</div>
+        </div>
+      </div>
+
+      <!-- Learning roadmap (what I’m playing with next) -->
+      <div class="card glass learning-roadmap reveal">
+        <h3>📚 What I’m Learning Next</h3>
+        <ul class="learning-list">
+          <li>
+            <strong>System administration & automation.</strong>
+            More PowerShell scripting and Windows Server tasks to reduce
+            repetitive work.
+          </li>
+          <li>
+            <strong>Azure AD & IAM.</strong>
+            Deeper into identity, conditional access, and secure onboarding
+            flows.
+          </li>
+          <li>
+            <strong>Advanced Firebase & security rules.</strong>
+            Hardening auth/Firestore rules for real-world, multi-role apps.
+          </li>
+          <li>
+            <strong>Incident documentation & SRE-style thinking.</strong>
+            Turning incidents into long-term reliability improvements.
+          </li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- Contact form for folks who want to collaborate -->
+    <section id="contact" class="section">
+      <header class="section-head">
+        <h2>Collaborate & Support</h2>
+        <p class="accent-script">Let’s build something thoughtful.</p>
+      </header>
+
+      <form
+        id="contactForm"
+        class="contact card glass reveal"
+        onsubmit="return false;"
+      >
+        <div class="field">
+          <label for="name">Name</label>
+          <input id="name" name="name" placeholder="Your name" required />
+        </div>
+        <div class="field">
+          <label for="email">Email</label>
+          <input
+            id="email"
+            name="email"
+            type="email"
+            placeholder="you@example.com"
+            required
+          />
+        </div>
+        <div class="field">
+          <label for="message">Message</label>
+          <textarea
+            id="message"
+            name="message"
+            placeholder="What do you want to build or fix together?"
+            required
+          ></textarea>
+        </div>
+        <div class="actions">
+          <button class="btn" id="sendBtn">Send</button>
+          <span id="formMsg" class="muted"></span>
+        </div>
+      </form>
+    </section>
+
+    <!-- Footer with the friendly sign-off -->
+    <footer class="footer glass">
+      <div>© <span id="year"></span> Antonette Petallo</div>
+      <div class="footer-links">
+        <a
+          href="https://www.linkedin.com/in/antonette-petallo/"
+          target="_blank"
+          rel="noopener"
+          >LinkedIn</a
+        >
+        <a href="https://github.com/Zynette" target="_blank" rel="noopener"
+          >GitHub</a
+        >
+        <a href="./Antonette_Petallo_ITSupport_Resume.pdf" download>Résumé</a>
+      </div>
+      <p class="muted tiny-note">
+        If you’re building something helpful for people, I’d love to be part of
+        it.
+      </p>
+    </footer>
+
+    <!-- Tiny helper bubble for quick project suggestions -->
+    <button
+      id="assistantBubble"
+      class="assistant-bubble glass"
+      type="button"
+      aria-label="Need help picking a project?"
+    >
+      💬
+    </button>
+
+    <div
+      id="assistantPanel"
+      class="assistant-panel glass hidden"
+      aria-hidden="true"
+    >
+      <p class="muted assistant-title">Need help picking a project?</p>
+      <div class="assistant-actions">
+        <button
+          type="button"
+          class="btn small outline"
+          data-assist="IT Support"
+        >
+          Show IT Support
+        </button>
+        <button type="button" class="btn small outline" data-assist="Web">
+          Show Web
+        </button>
+        <button type="button" class="btn small outline" data-assist="Database">
+          Show Database
+        </button>
+        <button type="button" class="btn small" id="assistantRandom">
+          Surprise me
+        </button>
+      </div>
+    </div>
+
+    <!-- Quick dock so mobile visitors can jump around easily -->
+    <div class="dock glass">
+      <a class="dock-btn" href="#projects" title="Projects">📁</a>
+      <a class="dock-btn" href="#contact" title="Contact">✉️</a>
+      <button class="dock-btn" id="toTop" title="Top">⤴︎</button>
+    </div>
+
+    <!-- Project data injected for the JS render -->
+    <script>
+      window.projects = [
+        {
+          id: "helpdesk-demo",
+          title: "Help Desk Ticket System (Demo)",
+          category: "IT Support",
+          desc: "Simulated Jira-style intake → triage → resolution with realistic ticket fields.",
+          tools: ["HTML", "CSS", "JS", "Firebase"],
+          links: { github: "#", live: "#" },
+          challenge:
+            "Many classmates only showed static lists. I wanted something that actually felt like a real Service Desk queue.",
+          approach:
+            "Designed a simple intake form with priority, category, and status, then wired it to Firebase so tickets persist and can be filtered.",
+          outcome:
+            "Helped me explain my support thinking during interviews — from triage, to escalation notes, to clean closures.",
+        },
+        {
+          id: "kb-hub",
+          title: "Knowledge Base Hub",
+          category: "IT Support",
+          desc: "Searchable internal docs inspired by UTS routines and KB workflows.",
+          tools: ["HTML", "Markdown", "LocalStorage"],
+          links: { github: "#", live: "#" },
+          challenge:
+            "KB links were often scattered across tools. I wanted a single, lightweight space to collect repeat fixes.",
+          approach:
+            "Structured articles by symptom, cause, and fix; added tagging and a simple search so analysts can find answers quickly.",
+          outcome:
+            "Turned messy notes into a browsable hub — showing how I think about reusability and support documentation.",
+        },
+        {
+          id: "net-monitor",
+          title: "Network Monitor Dashboard (Mockup)",
+          category: "IT Support",
+          desc: "Concept UI for ping/latency snapshots & network health tiles.",
+          tools: ["HTML", "CSS", "JS"],
+          links: { github: "#", live: "#" },
+          challenge:
+            "Non-technical users struggle to understand 'the network is slow'. I wanted a visual language for status.",
+          approach:
+            "Built cards that surface latency, status colours, and plain-language descriptions instead of just raw numbers.",
+          outcome:
+            "A talking piece for how I’d communicate technical network issues in a kinder, more visual way.",
+        },
+        {
+          id: "chaos-meter",
+          title: "Chaos Meter — Truth or Dare Overload",
+          category: "Advanced",
+          desc: "Neon truth-or-dare party game whose Chaos Meter escalates prompts for 2–10 players.",
+          tools: ["HTML", "CSS", "JS"],
+          links: {
+            github:
+              "https://github.com/Zynette/Chaos-Meter---Truth-or-Dare-Overload",
+            live: "https://zynette.github.io/Chaos-Meter---Truth-or-Dare-Overload/",
+          },
+          challenge:
+            "Wanted a multiplayer-ready truth-or-dare that felt reactive and cinematic enough for game nights and streams.",
+          approach:
+            "Built dynamic player chips, streak counters, and Chaos Meter tiers that unlock harder decks with responsive UI flourishes.",
+          outcome:
+            "Became my go-to demo for playful UX thinking and stateful vanilla JS that keeps sessions lively across devices.",
+        },
+        {
+          id: "dustless-living",
+          title: "Dustless Living Website",
+          category: "Web",
+          desc: "Real service business site with clearer copy, revamped SEO, and easier booking flow.",
+          tools: ["HTML", "CSS", "JS", "SEO"],
+          links: {
+            github: "https://github.com/Zynette/dustless-living-site",
+            live: "https://www.dustlessliving.com/",
+          },
+          challenge:
+            "My original cleaning service site felt generic and wasn’t converting — people couldn’t tell what made us different.",
+          approach:
+            "Rebuilt the layout with proof points, before/after visuals, and a friendlier inquiry form, then tightened SEO + local content.",
+          outcome:
+            "Saw ~35% more qualified leads within a month and way fewer ‘just curious’ inquiries because expectations were clearer.",
+        },
+        {
+          id: "pixora",
+          title: "Pixora Gallery Website",
+          category: "Web",
+          desc: "Firebase auth, storage, themes, and shareable public galleries.",
+          tools: ["HTML", "CSS", "JS", "Firebase"],
+          links: { github: "#", live: "#" },
+          challenge:
+            "I wanted a VSCO-style gallery without limits, where users can safely share and theme their own spaces.",
+          approach:
+            "Used Firebase Auth + Storage for uploads, Firestore for metadata, and custom themes so each gallery feels personal.",
+          outcome:
+            "A production-style project that stretched my knowledge of security rules, uploads, and UI polish.",
+        },
+        {
+          id: "aurora-weather",
+          title: "Aurora Weather — React Native",
+          category: "Web",
+          desc: "React Native weather app that hits geocoding + forecast APIs for quick hourly snapshots.",
+          tools: ["React Native", "JS", "Expo", "Open-Meteo"],
+          links: {
+            github: "https://github.com/Zynette/aurora-weather-reactnative",
+            live: "https://snack-web-player.s3.us-west-1.amazonaws.com/v2/54/index.html?initialUrl=exp%3A%2F%2Fu.expo.dev%2F933fd9c0-1666-11e7-afca-d980795c5824%3Fruntime-version%3Dexposdk%253A54.0.0%26channel-name%3Dproduction%26snack%3D%2540zynette%252Fhazardous-green-kiwi%26snack-channel%3DrtPJpU3B3R&origin=https%3A%2F%2Fsnack.expo.dev&verbose=false",
+          },
+          challenge:
+            "Wanted a weather tool that felt calmer and more informative than generic apps, especially for quick hourly planning.",
+          approach:
+            "Built search + geocoding, two hourly modes (temp-only vs temp + precipitation probability), recent-search chips, and graceful loading/error states in Expo.",
+          outcome:
+            "A polished theme that hits multiple API endpoints, shows meaningful hourly data, and proves I can ship React Native + Open-Meteo integrations.",
+        },
+        {
+          id: "focus-timer",
+          title: "Countdown Focus Timer",
+          category: "Web",
+          desc: "Pomodoro-style focus timer with light animations and UX details.",
+          tools: ["HTML", "CSS", "JS"],
+          links: {
+            github: "https://github.com/Zynette/CountdownTimer",
+            live: "https://zynette.github.io/CountdownTimer/",
+          },
+          challenge:
+            "Most focus timers feel either too plain or too complicated. I wanted something calm, playful, and useful.",
+          approach:
+            "Built preset focus blocks, subtle motion, and clear states for running, paused, and completed sessions.",
+          outcome:
+            "Friends actually used it for studying — a good sign that the UX felt intuitive and not distracting.",
+        },
+        {
+          id: "react-deck",
+          title: "Deck of Cards — Casino Felt Edition",
+          category: "Web",
+          desc: "React deck simulator with deal/draw/toss/shuffle and wildcard controls.",
+          tools: ["React", "JS", "HTML", "CSS"],
+          links: {
+            github: "https://github.com/Zynette/React-Deck",
+            live: "https://zynette.github.io/React-Deck/",
+          },
+          challenge:
+            "Wanted a playful way to practice React fundamentals that felt more tactile than a basic counter or todo list.",
+          approach:
+            "Built functional components with hooks, props, and event handlers to deal, draw, shuffle, and throw cards onto a felt-inspired UI.",
+          outcome:
+            "A compact React demo showing interactive state changes, a polished casino theme, and a live GitHub Pages deployment.",
+        },
+        {
+          id: "travel-time",
+          title: "Travel Time Website",
+          category: "Web",
+          desc: "Static travel landing page with hero sliders, feature cards, and destination highlights.",
+          tools: ["HTML", "CSS"],
+          links: {
+            github: "https://github.com/Zynette/Travel-Time-Website",
+            live: "https://zynette.github.io/Travel-Time-Website/",
+          },
+          challenge:
+            "Needed a simple but lively travel concept site that focused on story-driven copy and clean layout without heavy frameworks.",
+          approach:
+            "Designed a single-page flow with bold hero sections, curated imagery, and quick-hit info blocks tailored for weekend trip inspiration.",
+          outcome:
+            "A lightweight marketing page that showcases my ability to package visuals, copy, and responsive layout into one polished experience.",
+        },
+        {
+          id: "healthy-eating",
+          title: "Healthy Eating Landing Page",
+          category: "Web",
+          desc: "Clean HTML/CSS landing page encouraging healthy food habits with upbeat visuals.",
+          tools: ["HTML", "CSS"],
+          links: {
+            github: "https://github.com/Zynette/Healthy-Eating-Website",
+            live: "https://zynette.github.io/Healthy-Eating-Website/",
+          },
+          challenge:
+            "Practicing pure HTML/CSS meant finding ways to make a static health concept feel energetic without JavaScript.",
+          approach:
+            "Built a single-page layout with hero messaging, benefit cards, and ingredient imagery while keeping the typography bright and approachable.",
+          outcome:
+            "A bite-sized marketing page that shows I can tell a story with just markup, styling, and carefully chosen assets.",
+        },
+        {
+          id: "gradient-calc",
+          title: "Gradient Calculator",
+          category: "Web",
+          desc: "Pretty CSS gradient helper to match my aurora-style palettes.",
+          tools: ["HTML", "CSS", "JS"],
+          links: {
+            github: "https://github.com/Zynette/gradient-calculator",
+            live: "https://zynette.github.io/gradient-calculator/",
+          },
+          challenge:
+            "I kept manually tweaking gradients. I wanted a visual way to explore colours that still felt on brand.",
+          approach:
+            "Built sliders and presets that output ready-to-use CSS while matching softer, glassmorphism-friendly tones.",
+          outcome:
+            "Gave me a reusable tool for my own projects and a fun demo of UI + CSS creativity.",
+        },
+        {
+          id: "aspnet-crud",
+          title: "ASP.NET CRUD (Northwind)",
+          category: "Database",
+          desc: "EF Core CRUD, validation, and clean layering for a sample database.",
+          tools: ["C#", ".NET", "EF Core", "SQL"],
+          links: { github: "#", live: "#" },
+          challenge:
+            "It’s easy to get lost in scaffolding. I wanted to really understand what’s happening between UI, controllers, and DB.",
+          approach:
+            "Set up DbContext, proper models, and validation attributes, then documented the flow from HTTP request to SQL query.",
+          outcome:
+            "A clearer mental model for full-stack CRUD work I can bring into support, debugging, and future apps.",
+        },
+        {
+          id: "student-db",
+          title: "Student DB System",
+          category: "Database",
+          desc: "C++ + SQL system with access control and basic reporting.",
+          tools: ["C++", "SQL"],
+          links: { github: "#", live: "#" },
+          challenge:
+            "Storing records securely while keeping the interface simple for non-technical staff.",
+          approach:
+            "Implemented basic role-based access and structured queries for common admin tasks and reports.",
+          outcome:
+            "Showed that I can think about both security and usability at the data layer.",
+        },
+        {
+          id: "ask-antonette",
+          title: "Ask Antonette Bot (Concept)",
+          category: "Advanced",
+          desc: "Tiny Q&A-style concept trained on my IT notes & support patterns.",
+          tools: ["JS"],
+          links: { github: "#", live: "#" },
+          challenge:
+            "Co-op taught me that a lot of questions repeat. I wanted to imagine a tiny bot that reflects my style of answers.",
+          approach:
+            "Defined intents like 'VPN', 'password', 'MFA', and drafted human-sounding responses aligned with KB best practices.",
+          outcome:
+            "Helped me think about how automation can support — not replace — empathetic human IT support.",
+        },
+      ];
+    </script>
+    <!-- Case study modal I pop open for deeper dives -->
+    <div
+      id="caseModal"
+      class="modal-backdrop hidden"
+      aria-hidden="true"
+      role="dialog"
+      aria-modal="true"
+    >
+      <div class="modal glass">
+        <button
+          type="button"
+          class="modal-close"
+          id="caseClose"
+          aria-label="Close case study"
+        >
+          ✕
+        </button>
+        <h3 id="caseTitle"></h3>
+        <p id="caseMeta" class="muted small-text"></p>
+        <div class="modal-body">
+          <p>
+            <strong>Challenge.</strong>
+            <span id="caseChallenge"></span>
+          </p>
+          <p>
+            <strong>Approach.</strong>
+            <span id="caseApproach"></span>
+          </p>
+          <p>
+            <strong>Outcome.</strong>
+            <span id="caseOutcome"></span>
+          </p>
+        </div>
+        <div class="links" id="caseLinks"></div>
+      </div>
+    </div>
+    <script src="./script.js"></script>
+  </body>
+</html>
