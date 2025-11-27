@@ -110,14 +110,26 @@ body {
 /* Scroll reveal = slight lift so sections float in softly */
 .reveal {
   opacity: 0;
-  transform: translateY(18px) scale(0.98);
+  transform: translateY(28px) scale(0.98);
   transition:
-    opacity 0.6s ease-out,
-    transform 0.6s ease-out;
+    opacity 0.65s ease,
+    transform 0.65s ease;
+  will-change: opacity, transform;
 }
 .reveal.reveal-in {
   opacity: 1;
   transform: translateY(0) scale(1);
+}
+.reveal.reveal-out {
+  opacity: 0;
+  transform: translateY(16px) scale(0.97);
+}
+@media (prefers-reduced-motion: reduce) {
+  .reveal {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none;
+  }
 }
 
 /* Support tools grid – keeps those helper cards tidy */
@@ -159,17 +171,6 @@ body {
   opacity:0;
   transform: translateY(-10px) scale(.9);
 }
-
-/* Static SVG doodles so the layout never feels flat */
-.decor {
-  position: fixed;
-  z-index: 1;
-  color: rgba(255, 255, 255, 0.22);
-  pointer-events: none;
-}
-.decor-leaf { bottom: -10px; left: -10px; width: 180px; opacity: 0.18; }
-.decor-wave { bottom: 40px; right: -40px; width: 220px; opacity: 0.14; }
-.decor-sun  { top: -10px; right: 20px; width: 140px; opacity: 0.18; }
 
 /* Canvas sky sits behind everything at z-index 0 */
 #sky { position: fixed; inset:0; z-index:0; opacity:.45; transition:opacity .5s ease; }

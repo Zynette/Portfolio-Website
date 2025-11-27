@@ -213,24 +213,55 @@
     hero.style.setProperty('--my', `${y}%`);
   });
 
-    // Scroll reveal: IntersectionObserver makes cards float in once
+    // Scroll reveal: IntersectionObserver keeps cards fading in/out
+  const REVEAL_VISIBILITY = 0.15;
   let revealObserver;
 
+  const primeRevealTargets = (root = document) => {
+    const scope = root || document;
+    $$('.reveal', scope).forEach((el) => {
+      if (!el.dataset.revealReady) {
+        el.dataset.revealReady = 'true';
+        el.classList.add('reveal-out');
+      }
+      revealObserver?.observe(el);
+    });
+  };
+
   const setupRevealObserver = () => {
-    if (revealObserver) return;
+    if (revealObserver) {
+      primeRevealTargets();
+      return;
+    }
+
+    if (!('IntersectionObserver' in window)) {
+      $$('.reveal').forEach((el) => {
+        el.classList.add('reveal-in');
+        el.classList.remove('reveal-out');
+      });
+      return;
+    }
+
     revealObserver = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
-          if (entry.isIntersecting) {
+          const isVisible = entry.intersectionRatio >= REVEAL_VISIBILITY;
+          if (isVisible) {
             entry.target.classList.add('reveal-in');
-            revealObserver.unobserve(entry.target);
+            entry.target.classList.remove('reveal-out');
+          } else {
+            entry.target.classList.remove('reveal-in');
+            entry.target.classList.add('reveal-out');
           }
         });
       },
-      { threshold: 0.15 }
+      {
+        threshold: [0, REVEAL_VISIBILITY, 0.4],
+        rootMargin: '0px 0px -5% 0px',
+      }
     );
 
-    $$('.reveal').forEach((el) => revealObserver.observe(el));
+    primeRevealTargets();
   };
 
   // Theme palette chips + localStorage memory
@@ -282,6 +313,83 @@
     const STAR_COUNT = 70;
     const CLOUD_COUNT = 12;
     const DOT_COUNT = 32;
+    const CONSTELLATION_PATTERNS = [
+      {
+        name: 'Orion',
+        stars: [
+          { x: 0.18, y: 0.28, magnitude: 1.4 },
+          { x: 0.3, y: 0.23, magnitude: 1.05 },
+          { x: 0.24, y: 0.36, magnitude: 1 },
+          { x: 0.3, y: 0.4, magnitude: 1 },
+          { x: 0.36, y: 0.36, magnitude: 1 },
+          { x: 0.4, y: 0.52, magnitude: 1.2 },
+          { x: 0.25, y: 0.54, magnitude: 1.1 },
+        ],
+        lines: [
+          [0, 1],
+          [0, 2],
+          [2, 3],
+          [3, 4],
+          [4, 5],
+          [5, 6],
+          [6, 2],
+          [1, 4],
+        ],
+      },
+      {
+        name: 'Cassiopeia',
+        stars: [
+          { x: 0.62, y: 0.12, magnitude: 1 },
+          { x: 0.66, y: 0.08, magnitude: 0.95 },
+          { x: 0.71, y: 0.13, magnitude: 1.05 },
+          { x: 0.76, y: 0.09, magnitude: 0.95 },
+          { x: 0.81, y: 0.14, magnitude: 1.1 },
+        ],
+        lines: [
+          [0, 1],
+          [1, 2],
+          [2, 3],
+          [3, 4],
+        ],
+      },
+      {
+        name: 'Lyra',
+        stars: [
+          { x: 0.5, y: 0.18, magnitude: 1.25 },
+          { x: 0.48, y: 0.22, magnitude: 0.95 },
+          { x: 0.52, y: 0.24, magnitude: 0.95 },
+          { x: 0.55, y: 0.2, magnitude: 0.9 },
+        ],
+        lines: [
+          [0, 1],
+          [1, 2],
+          [2, 3],
+          [3, 0],
+        ],
+      },
+      {
+        name: 'Scorpius',
+        stars: [
+          { x: 0.68, y: 0.62, magnitude: 1.15 },
+          { x: 0.72, y: 0.69, magnitude: 1 },
+          { x: 0.76, y: 0.75, magnitude: 0.95 },
+          { x: 0.8, y: 0.82, magnitude: 1.05 },
+          { x: 0.82, y: 0.88, magnitude: 1.1 },
+          { x: 0.79, y: 0.93, magnitude: 1.2 },
+          { x: 0.74, y: 0.9, magnitude: 1.05 },
+        ],
+        lines: [
+          [0, 1],
+          [1, 2],
+          [2, 3],
+          [3, 4],
+          [4, 5],
+          [5, 6],
+          [6, 2],
+        ],
+      },
+    ];
+    const constellations = [];
     let shootingCooldown = 0;
 
     const readVar = (styles, name, fallback) => styles.getPropertyValue(name).trim() || fallback;
@@ -311,6 +419,72 @@
           r: Math.random() * 1.2 + 0.6,
         });
       }
+    };
+
+    const layoutConstellations = () => {
+      constellations.length = 0;
+      CONSTELLATION_PATTERNS.forEach((pattern) => {
+        const scaled = pattern.stars.map((star) => ({
+          x: star.x * sky.width,
+          y: star.y * sky.height,
+          magnitude: star.magnitude || 1,
+          twinkle: Math.random() * Math.PI * 2,
+        }));
+        constellations.push({
+          name: pattern.name,
+          stars: scaled,
+          lines: pattern.lines || [],
+          pulse: Math.random() * Math.PI * 2,
+        });
+      });
+    };
+
+    const drawConstellations = () => {
+      if (!constellations.length) return;
+      const time = performance.now() * 0.0012;
+      ctx.save();
+      ctx.lineCap = 'round';
+      ctx.lineJoin = 'round';
+
+      constellations.forEach((pattern) => {
+        const pulse = 0.35 + 0.45 * ((Math.sin(time + pattern.pulse) + 1) / 2);
+
+        ctx.save();
+        ctx.globalAlpha = 0.18 + pulse * 0.35;
+        ctx.lineWidth = 0.8 + pulse * 0.6;
+        ctx.strokeStyle = palette.accent || '#7b9eff';
+        ctx.beginPath();
+        pattern.lines.forEach(([start, end]) => {
+          const a = pattern.stars[start];
+          const b = pattern.stars[end];
+          if (!a || !b) return;
+          ctx.moveTo(a.x, a.y);
+          ctx.lineTo(b.x, b.y);
+        });
+        ctx.stroke();
+        ctx.restore();
+
+        pattern.stars.forEach((star) => {
+          const twinkle = 0.5 + 0.5 * Math.sin(time * 1.6 + star.twinkle);
+          ctx.globalAlpha = 0.6 + 0.3 * twinkle;
+          ctx.fillStyle = '#fff';
+          ctx.shadowBlur = 14 * (star.magnitude + twinkle * 0.3);
+          ctx.shadowColor = palette.glow2 || '#ffffff';
+          ctx.beginPath();
+          ctx.arc(
+            star.x,
+            star.y,
+            star.magnitude * (1.2 + twinkle * 0.25),
+            0,
+            Math.PI * 2
+          );
+          ctx.fill();
+        });
+      });
+
+      ctx.restore();
+      ctx.shadowBlur = 0;
+      ctx.globalAlpha = 1;
     };
 
     const initClouds = () => {
@@ -414,6 +588,7 @@
       });
       updateShootingStars();
       drawShootingStars();
+      drawConstellations();
       frame = requestAnimationFrame(drawStars);
     };
 
@@ -483,6 +658,7 @@
       sky.height = window.innerHeight;
       shootingStars.length = 0;
       shootingCooldown = rand(120, 260);
+      layoutConstellations();
       if (mode === 'light') {
         initClouds();
         frame = requestAnimationFrame(drawClouds);
@@ -643,9 +819,7 @@
       .join('');
 
     // Re-attach the reveal observer whenever I re-render cards
-    if (revealObserver) {
-      $$('.reveal', grid).forEach((el) => revealObserver.observe(el));
-    }
+    primeRevealTargets(grid);
   };
 
   const renderStories = () => {
@@ -696,9 +870,7 @@
       })
       .join('');
 
-    if (revealObserver) {
-      $$('.reveal', stories).forEach((el) => revealObserver.observe(el));
-    }
+    primeRevealTargets(stories);
   };
 
   const setView = (mode) => {
