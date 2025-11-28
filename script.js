@@ -9,7 +9,6 @@
   const navToggle = $('#navToggle');
   const navMenu = $('#navMenu');
   const assistantBubble = $('#assistantBubble');
-  const heartSticker = document.querySelector('.sticker.heart');
 
   let updateSkyMode = () => {};
   let refreshSkyPalette = () => {};
@@ -137,7 +136,6 @@
   const scrollHideTargets = [
     { el: modeToggle, mq: '(max-width: 768px)' },
     { el: assistantBubble, mq: '(max-width: 768px)' },
-    { el: heartSticker, mq: '(max-width: 768px)' },
   ];
   const scrollHideTimers = new WeakMap();
 
@@ -285,6 +283,41 @@
 
   // Quick action dock (mainly the back-to-top button)
   $('#toTop')?.addEventListener('click', () => window.scrollTo({ top:0, behavior:'smooth' }));
+
+  const dock = document.querySelector('.dock');
+  const footer = document.querySelector('.footer');
+  const contactSection = document.querySelector('#contact');
+  const DOCK_BASE_BOTTOM = 14;
+  const DOCK_GAP = 18;
+
+  const updateDockPosition = () => {
+    if (!dock) return;
+    const dockHeight = dock.offsetHeight || 48;
+    const viewportBottom = window.scrollY + window.innerHeight;
+    const contactEnd = contactSection
+      ? contactSection.offsetTop + contactSection.offsetHeight
+      : Infinity;
+    const footerTop = footer ? footer.offsetTop : Infinity;
+    const shouldPin = contactSection && viewportBottom >= contactEnd;
+
+    if (shouldPin) {
+      const minTop = contactEnd + DOCK_GAP;
+      const maxTop = footerTop - dockHeight - DOCK_GAP;
+      const cappedTop =
+        Number.isFinite(maxTop) ? Math.min(minTop, maxTop) : minTop;
+      const targetTop = Math.max(0, cappedTop);
+      dock.classList.add('dock-pinned');
+      dock.style.top = `${targetTop}px`;
+      dock.style.bottom = '';
+    } else {
+      dock.classList.remove('dock-pinned');
+      dock.style.top = '';
+      dock.style.bottom = `${DOCK_BASE_BOTTOM}px`;
+    }
+  };
+  window.addEventListener('scroll', updateDockPosition, { passive: true });
+  window.addEventListener('resize', updateDockPosition);
+  updateDockPosition();
 
   // Sparkle cursor layer because why not
   const sparkles = $('#sparkles');
@@ -785,33 +818,37 @@
         const awaiting = !hasGit && !hasLive;
         return `
         <article class="card glass project reveal" data-id="${p.id}">
-          <h4 class="project-title" data-id="${p.id}">${p.title}</h4>
-          <p class="muted">${p.category}</p>
-          <p>${p.desc}</p>
-          ${
-            awaiting
-              ? '<p class="project-status muted">Status: ongoing / planned to incorporate on GitHub.</p>'
-              : ''
-          }
-          <div class="tools">
-            ${(p.tools || [])
-              .map((t) => `<span class="tool">${t}</span>`)
-              .join('')}
-          </div>
-          <div class="links">
-            ${
-              hasGit
-                ? `<a class="btn outline" href="${p.links.github}" target="_blank" rel="noopener">GitHub</a>`
-                : ''
-            }
-            ${
-              hasLive
-                ? `<a class="btn outline" href="${p.links.live}" target="_blank" rel="noopener">Live</a>`
-                : ''
-            }
-            <button class="btn small outline case-btn" type="button" data-id="${p.id}">
-              Case study
-            </button>
+          <div class="project-body">
+            <div class="project-copy">
+              <h4 class="project-title" data-id="${p.id}">${p.title}</h4>
+              <p class="muted">${p.category}</p>
+              <p>${p.desc}</p>
+              ${
+                awaiting
+                  ? '<p class="project-status muted">Status: ongoing / planned to incorporate on GitHub.</p>'
+                  : ''
+              }
+            </div>
+            <div class="project-tools">
+              ${(p.tools || [])
+                .map((t) => `<span class="tool">${t}</span>`)
+                .join('')}
+            </div>
+            <div class="project-links">
+              ${
+                hasGit
+                  ? `<a class="btn outline" href="${p.links.github}" target="_blank" rel="noopener">GitHub</a>`
+                  : ''
+              }
+              ${
+                hasLive
+                  ? `<a class="btn outline" href="${p.links.live}" target="_blank" rel="noopener">Live</a>`
+                  : ''
+              }
+              <button class="btn small outline case-btn" type="button" data-id="${p.id}">
+                Case study
+              </button>
+            </div>
           </div>
         </article>
       `;
@@ -1019,12 +1056,29 @@
   const osInfo = $('#osInfo');
   if (osInfo) {
     const ua = window.navigator.userAgent || '';
+    const platform =
+      window.navigator.userAgentData?.platform ||
+      window.navigator.platform ||
+      '';
+    const uaLower = ua.toLowerCase();
+    const platformLower = platform.toLowerCase();
+
+    const isIOSDevice =
+      /iphone|ipod/.test(uaLower) ||
+      /ios/.test(platformLower) ||
+      (/macintosh/.test(uaLower) && 'ontouchend' in document);
+    const isIPadOS =
+      (/ipad/.test(uaLower) ||
+        (/macintosh/.test(uaLower) && navigator.maxTouchPoints > 1)) &&
+      !/iphone/.test(uaLower);
+
     let label = 'another OS';
-    if (/Windows/i.test(ua)) label = 'Windows';
-    else if (/Macintosh|Mac OS X/i.test(ua)) label = 'macOS';
-    else if (/Linux/i.test(ua)) label = 'Linux';
-    else if (/Android/i.test(ua)) label = 'Android';
-    else if (/iPhone|iPad/i.test(ua)) label = 'iOS / iPadOS';
+    if (/windows/i.test(uaLower)) label = 'Windows';
+    else if (/android/i.test(uaLower)) label = 'Android';
+    else if (isIPadOS) label = 'iPadOS';
+    else if (isIOSDevice) label = 'iOS';
+    else if (/macintosh|mac os x/i.test(uaLower)) label = 'macOS';
+    else if (/linux/i.test(uaLower)) label = 'Linux';
 
     osInfo.textContent = `You’re likely using ${label}.`;
   }
