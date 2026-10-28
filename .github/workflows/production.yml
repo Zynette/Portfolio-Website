@@ -1,0 +1,75 @@
+name: Portfolio production
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: portfolio-production
+  cancel-in-progress: false
+jobs:
+  verify:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci
+      - run: npx playwright install --with-deps chromium
+      - run: npm run check
+      - run: npm run build
+      - run: npm test
+      - run: npm run test:browser
+      - uses: actions/upload-artifact@v4
+        with:
+          name: production-dist
+          path: dist/
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: production-browser-review
+          path: |
+            playwright-report/
+            docs/screenshots/v3/
+  deploy:
+    needs: verify
+    if: github.ref == 'refs/heads/main'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    environment: production
+    steps:
+      - uses: actions/download-artifact@v4
+        with:
+          name: production-dist
+          path: dist/
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+      - name: Check deployment credentials
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+        run: |
+          test -n "$CLOUDFLARE_API_TOKEN" || { echo 'Missing GitHub secret CLOUDFLARE_API_TOKEN'; exit 1; }
+          test -n "$CLOUDFLARE_ACCOUNT_ID" || { echo 'Missing GitHub secret CLOUDFLARE_ACCOUNT_ID'; exit 1; }
+      - name: Publish to the existing Cloudflare Pages project
+        run: npx --yes wrangler@4 pages deploy dist --project-name=portfolio-website --branch=main
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+      - name: Verify real domain and privacy removals
+        shell: bash
+        run: |
+          set -euo pipefail
+          for attempt in 1 2 3 4 5 6; do
+            if curl --fail --silent --show-error 'https://antonettepetallo.com/release.json?release=${{ github.sha }}' | node -e 'let b="";process.stdin.on("data",c=>b+=c);process.stdin.on("end",()=>{try{process.exit(JSON.parse(b).commit===process.env.GITHUB_SHA?0:1)}catch{process.exit(1)}})'; then break; fi
+            if [ "$attempt" = 6 ]; then echo 'Domain does not yet serve this release'; exit 1; fi
+            sleep 10
+          done
+          for url in resume.html assets/Antonette-Petallo-Resume.pdf Antonette_Petallo_ITSupport_Resume.pdf; do
+            test "$(curl --silent --output /dev/null --write-out '%{http_code}' "https://antonettepetallo.com/$url")" = 410
+          done

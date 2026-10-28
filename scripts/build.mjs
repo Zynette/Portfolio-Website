@@ -1,4 +1,4 @@
-import { cp, mkdir, rm } from "node:fs/promises";
+import { cp, mkdir, rm, writeFile } from "node:fs/promises";
 // Ship only public assets. The source repo, review notes and tests never enter dist.
 await rm("dist", { recursive: true, force: true });
 await mkdir("dist", { recursive: true });
@@ -8,7 +8,6 @@ for (const entry of [
   "script.js",
   "work",
   "assets",
-  "resume.html",
   "404.html",
   "favicon.svg",
   "favicon-16.png",
@@ -23,4 +22,9 @@ for (const entry of [
 ]) {
   await cp(entry, `dist/${entry}`, { recursive: true });
 }
+await cp("worker/contact.mjs", "dist/_worker.js");
+await writeFile(
+  "dist/release.json",
+  JSON.stringify({ version: "3.0.0", commit: process.env.GITHUB_SHA || null }),
+);
 console.log("Built static portfolio in dist/ (public allowlist only).");

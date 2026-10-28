@@ -1,18 +1,13 @@
-// Progressive enhancements only. All evidence, project stories and contact links are static HTML.
 (() => {
-  const $ = (selector) => document.querySelector(selector);
-  const $$ = (selector) => [...document.querySelectorAll(selector)];
-
+  document.documentElement.classList.add("js");
+  const $ = (s) => document.querySelector(s);
   const year = $("#year");
-  if (year) year.textContent = new Date().getFullYear();
-
-  const menu = $("#navigation");
-  const toggle = $(".menu-toggle");
-  if (menu && toggle) {
-    const header = $(".site-header");
-    header.classList.add("enhanced");
+  if (year) year.textContent = String(new Date().getFullYear());
+  const toggle = $(".menu-toggle"),
+    menu = $("#navigation");
+  if (toggle && menu) {
     toggle.hidden = false;
-    const closeMenu = (restore = false) => {
+    const close = (restore = false) => {
       menu.classList.remove("is-open");
       toggle.setAttribute("aria-expanded", "false");
       if (restore) toggle.focus();
@@ -25,10 +20,9 @@
     menu.addEventListener("click", (event) => {
       const link = event.target.closest("a");
       if (!link) return;
-      closeMenu();
-      // On-page destinations receive focus after the mobile menu collapses.
+      close();
       if (link.hash && link.pathname === location.pathname) {
-        const target = document.getElementById(link.hash.slice(1));
+        const target = $(link.hash);
         if (target) {
           target.setAttribute("tabindex", "-1");
           target.focus({ preventScroll: true });
@@ -40,123 +34,153 @@
         event.key === "Escape" &&
         toggle.getAttribute("aria-expanded") === "true"
       )
-        closeMenu(true);
+        close(true);
     });
-    const mobile = matchMedia("(max-width: 640px)");
-    mobile.addEventListener("change", () => closeMenu());
+    matchMedia("(max-width:540px)").addEventListener("change", () => close());
   }
-
-  const controls = $(".work-controls");
-  const input = $("#work-search");
-  const items = $$(".work-item");
-  if (controls && input && items.length) {
-    let category = "all";
-    controls.hidden = false;
-    const filter = () => {
-      const term = input.value.trim().toLocaleLowerCase();
-      let count = 0;
-      for (const item of items) {
-        const match =
-          (category === "all" || item.dataset.category === category) &&
-          (item.dataset.search + " " + item.textContent)
-            .toLocaleLowerCase()
-            .includes(term);
-        item.hidden = !match;
-        if (match) count++;
-      }
-      $("#result-count").textContent =
-        `${count} ${count === 1 ? "project" : "projects"} shown.`;
-      $(".empty-state").hidden = count !== 0;
-      const pair = $(".work-pair");
-      pair.hidden = [...pair.querySelectorAll(".work-item")].every(
-        (item) => item.hidden,
+  const turn = $(".perspective-button"),
+    art = $(".hero-art");
+  if (turn && art) {
+    turn.hidden = false;
+    let view = 0;
+    const views = [
+      "01 / The whole picture",
+      "02 / A closer look",
+      "03 / Another possibility",
+    ];
+    turn.addEventListener("click", () => {
+      view = (view + 1) % 3;
+      art.dataset.view = String(view);
+      $("#perspective-label").textContent = views[view];
+    });
+  }
+  const form = $("#contact-form");
+  if (!form) return;
+  const button = form.querySelector('[type="submit"]'),
+    status = $("#form-status");
+  let widget = null,
+    token = "",
+    submitting = false,
+    started = false;
+  const say = (message, state = "") => {
+    status.textContent = message;
+    status.dataset.state = state;
+  };
+  const resetSecurity = () => {
+    token = "";
+    button.disabled = true;
+    if (widget !== null && window.turnstile) window.turnstile.reset(widget);
+  };
+  const start = async () => {
+    if (started) return;
+    started = true;
+    try {
+      const response = await fetch("/api/contact/config", {
+        headers: { Accept: "application/json" },
+      });
+      if (!response.ok) throw Error("unavailable");
+      const config = await response.json();
+      if (!config.siteKey) throw Error("unavailable");
+      const script = document.createElement("script");
+      script.src =
+        "https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit";
+      script.async = true;
+      script.onload = () => {
+        if (!window.turnstile) {
+          say("Security check unavailable. Please try again later.", "error");
+          return;
+        }
+        widget = window.turnstile.render("#security-check", {
+          sitekey: config.siteKey,
+          action: "contact",
+          theme: "light",
+          size: "flexible",
+          callback: (value) => {
+            token = value;
+            button.disabled = submitting;
+            if (!status.dataset.state) say("Ready when you are.");
+          },
+          "expired-callback": () => {
+            token = "";
+            button.disabled = true;
+            say("Please complete a new security check.");
+          },
+          "error-callback": () => {
+            token = "";
+            button.disabled = true;
+            say("Security check unavailable. Please try again later.", "error");
+          },
+        });
+      };
+      script.onerror = () =>
+        say("Security check unavailable. Please try again later.", "error");
+      document.head.append(script);
+      say("Please complete the security check.");
+    } catch {
+      say(
+        "Contact is temporarily unavailable. You can also reach me on LinkedIn.",
+        "error",
       );
-    };
-    controls.addEventListener("click", (event) => {
-      const button = event.target.closest("[data-filter]");
-      if (!button) return;
-      category = button.dataset.filter;
-      $$("[data-filter]").forEach((item) =>
-        item.setAttribute("aria-pressed", String(item === button)),
+    }
+  };
+  // Load third-party spam protection only when the visitor reaches the form.
+  if ("IntersectionObserver" in window) {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        if (entries.some((entry) => entry.isIntersecting)) {
+          observer.disconnect();
+          start();
+        }
+      },
+      { rootMargin: "150px" },
+    );
+    observer.observe(form);
+  } else start();
+  form.addEventListener("submit", async (event) => {
+    event.preventDefault();
+    if (submitting) return;
+    if (!token) {
+      say("Please complete the security check.", "error");
+      return;
+    }
+    if (!form.reportValidity()) return;
+    submitting = true;
+    button.disabled = true;
+    say("Sending your message…");
+    const data = Object.fromEntries(new FormData(form));
+    data.token = token;
+    try {
+      const response = await fetch("/api/contact", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+        },
+        body: JSON.stringify(data),
+        signal: AbortSignal.timeout(25000),
+      });
+      const result = await response.json();
+      if (!response.ok || result.accepted !== true)
+        throw Error(
+          result.error ||
+            "Delivery could not be confirmed. Please try again later.",
+        );
+      form.reset();
+      say(
+        "Thank you. The email service accepted your message for delivery.",
+        "success",
       );
-      filter();
-    });
-    input.addEventListener("input", filter);
-    $("#reset-work").addEventListener("click", () => {
-      input.value = "";
-      category = "all";
-      $$("[data-filter]").forEach((item) =>
-        item.setAttribute(
-          "aria-pressed",
-          String(item.dataset.filter === "all"),
-        ),
+    } catch (error) {
+      say(
+        error.name === "TimeoutError"
+          ? "The connection timed out. Delivery is unconfirmed. Please try again later."
+          : error.message ||
+              "The message could not be confirmed. Please try again later.",
+        "error",
       );
-      filter();
-      input.focus();
-    });
-    filter();
-  }
-
-  const steps = [
-    [
-      "UNDERSTAND",
-      "Get the whole picture.",
-      "What were you trying to do? What changed? I clarify the symptom and its impact before deciding where to look.",
-    ],
-    [
-      "ISOLATE",
-      "Test the right assumption.",
-      "Signing in and having permission are different checks. I separate identity, access and application behaviour, then investigate one layer at a time.",
-    ],
-    [
-      "RESOLVE",
-      "Make the next step clear.",
-      "I use an approved change or pass clear evidence to the right team. Then I ask the person to confirm they can complete the original task.",
-    ],
-    [
-      "DOCUMENT",
-      "Leave a clearer path.",
-      "I record the symptom, checks and resolution in reusable language. The next person should have a better starting point.",
-    ],
-  ];
-  const traceControls = $(".trace-controls");
-  const panel = $("#trace-panel");
-  if (traceControls && panel) {
-    traceControls.hidden = false;
-    $(".process-fallback").hidden = true;
-    traceControls.addEventListener("click", (event) => {
-      const button = event.target.closest("[data-step]");
-      if (!button) return;
-      const index = Number(button.dataset.step);
-      const [label, title, description] = steps[index];
-      $$("[data-step]").forEach((item) =>
-        item.setAttribute("aria-pressed", String(item === button)),
-      );
-      $(".trace-map").dataset.stage = String(index);
-      panel.querySelector(".eyebrow").textContent = `0${index + 1} / ${label}`;
-      panel.querySelector("h3").textContent = title;
-      panel.querySelector("p").textContent = description;
-    });
-  }
-
-  const copy = $(".copy-email");
-  if (copy) {
-    copy.hidden = false;
-    copy.addEventListener("click", async () => {
-      try {
-        if (!navigator.clipboard?.writeText)
-          throw new Error("Clipboard unavailable");
-        await navigator.clipboard.writeText("antonettepetallo73@gmail.com");
-        $("#copy-status").textContent = "Email copied.";
-      } catch {
-        $("#copy-status").textContent =
-          "Select the address above to copy it, or open it in your email app.";
-      }
-    });
-  }
-  const print = $(".print-resume");
-  if (print) {
-    print.hidden = false;
-    print.addEventListener("click", () => window.print());
-  }
+    } finally {
+      submitting = false;
+      resetSecurity();
+    }
+  });
 })();

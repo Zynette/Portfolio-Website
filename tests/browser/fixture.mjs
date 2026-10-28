@@ -11,6 +11,7 @@ const types = {
   ".webp": "image/webp",
   ".jpg": "image/jpeg",
   ".woff2": "font/woff2",
+  ".woff": "font/woff",
   ".pdf": "application/pdf",
   ".xml": "application/xml",
   ".txt": "text/plain",
@@ -22,6 +23,18 @@ export const test = base.extend({
   page: async ({ page }, use) => {
     await page.route("http://portfolio.test/**", async (route) => {
       const url = new URL(route.request().url());
+      if (url.pathname.startsWith("/api/contact"))
+        return route.fulfill({
+          status: 503,
+          contentType: "application/json",
+          body: JSON.stringify({ error: "Contact temporarily unavailable." }),
+        });
+      if (
+        /^\/(?:resume(?:\.html)?\/?|assets\/Antonette-Petallo-Resume\.pdf|Antonette_Petallo_ITSupport_Resume\.pdf)$/i.test(
+          url.pathname,
+        )
+      )
+        return route.fulfill({ status: 410, body: "Document removed." });
       const file = path.resolve(
         root,
         "." +
@@ -40,7 +53,7 @@ export const test = base.extend({
           headers: {
             "X-Content-Type-Options": "nosniff",
             "Content-Security-Policy":
-              "default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self'; font-src 'self'; connect-src 'none'; object-src 'none'; base-uri 'self'; form-action 'none'",
+              "default-src 'self'; script-src 'self' https://challenges.cloudflare.com; style-src 'self'; img-src 'self'; font-src 'self'; connect-src 'self' https://challenges.cloudflare.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src https://challenges.cloudflare.com",
           },
         });
       } catch {

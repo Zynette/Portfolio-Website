@@ -9,6 +9,6 @@ The public copy deliberately omits unsupported metrics and credential-completion
 5. CareerOS is currently labelled planning only, based on the available project status and repository contents. If you have newer app code elsewhere, provide that evidence before changing its status.
 6. Kitchenly is described only as an experiment. Its architecture, screenshots, maturity and contribution details need verification before a featured case study.
 7. Aurora Weather and Media Library are labelled learning/coursework projects. Confirm whether you want those to remain featured alongside newer work when it becomes reviewable.
-8. Email remains `antonettepetallo73@gmail.com`, taken from the old résumé and contact endpoint. LinkedIn remains the existing public profile. Review both before release.
+8. Email remains the existing private inbox, taken from the old résumé and contact endpoint. LinkedIn remains the existing public profile. Review both before release.
 
 The user's explicit role/date information controls the redesign: IT Analyst, Hospitality Services, February 2026–present; IT Technical Assistant, UTS, January 2025–January 2026. No confidential university case is used. The support walkthrough is fictional and labelled as such.
