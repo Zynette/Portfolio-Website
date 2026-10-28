@@ -8,7 +8,6 @@ for (const entry of [
   "script.js",
   "work",
   "assets",
-  "resume.html",
   "404.html",
   "favicon.svg",
   "favicon-16.png",
@@ -23,4 +22,5 @@ for (const entry of [
 ]) {
   await cp(entry, `dist/${entry}`, { recursive: true });
 }
+await cp("worker/contact.mjs", "dist/_worker.js");
 console.log("Built static portfolio in dist/ (public allowlist only).");

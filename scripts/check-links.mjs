@@ -1,7 +1,6 @@
 import { readFile, readdir, mkdir, writeFile } from "node:fs/promises";
 const files = [
   "dist/index.html",
-  "dist/resume.html",
   ...(await readdir("dist/work")).map((f) => `dist/work/${f}`),
 ];
 const links = new Set();
