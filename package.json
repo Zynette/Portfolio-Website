@@ -1,0 +1,19 @@
+{
+  "name": "antonette-portfolio",
+  "version": "2.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "node scripts/build.mjs",
+    "check": "node --check script.js && node --check scripts/build.mjs && prettier --check .",
+    "format": "prettier --write .",
+    "test": "node --test tests/site.test.mjs",
+    "test:browser": "playwright test",
+    "test:links": "node scripts/check-links.mjs"
+  },
+  "devDependencies": {
+    "@axe-core/playwright": "4.10.2",
+    "@playwright/test": "1.56.1",
+    "prettier": "3.6.2"
+  }
+}

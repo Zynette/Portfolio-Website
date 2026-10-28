@@ -1,0 +1,7 @@
+node_modules
+dist
+.openai
+playwright-report
+test-results
+assets/fonts
+package-lock.json

@@ -1,981 +1,747 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Antonette Petallo — IT Support Analyst • Web</title>
+    <title>Antonette Petallo — IT Analyst & Technology Builder</title>
     <meta
       name="description"
-      content="Antonette Petallo — IT Support Analyst & Technical Specialist. Portfolio, projects, case studies, and contact."
+      content="I support enterprise applications at McMaster University and build practical software. Explore my work, approach, and experience. Hamilton, Ontario."
     />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:wght@500;700&family=Kalam:wght@400;700&display=swap"
-      rel="stylesheet"
+    <meta name="theme-color" content="#f3f1e9" />
+    <link rel="canonical" href="https://antonettepetallo.com/" />
+    <meta property="og:type" content="website" />
+    <meta
+      property="og:title"
+      content="Antonette Petallo — Clarity, by design"
     />
+    <meta
+      property="og:description"
+      content="IT Analyst at McMaster University. Systems thinker. Hands-on builder. A human approach to technology."
+    />
+    <meta property="og:url" content="https://antonettepetallo.com/" />
+    <meta
+      property="og:image"
+      content="https://antonettepetallo.com/assets/social-preview.png"
+    />
+    <meta
+      property="og:image:alt"
+      content="Antonette Petallo. IT Analyst and technology builder. Clarity, by design."
+    />
+    <meta name="twitter:card" content="summary_large_image" />
     <link rel="icon" href="./favicon.svg" type="image/svg+xml" />
-    <link rel="icon" type="image/png" sizes="32x32" href="./favicon-32.png" />
-    <link rel="icon" type="image/png" sizes="16x16" href="./favicon-16.png" />
-    <link rel="apple-touch-icon" sizes="180x180" href="./favicon-512.png" />
-    <link rel="shortcut icon" href="./favicon.ico" />
-    <meta name="theme-color" content="#0d152c" />
+    <link rel="apple-touch-icon" href="./favicon-512.png" />
+    <link
+      rel="preload"
+      href="./assets/fonts/ibm-plex-sans-latin-400-normal.woff2"
+      as="font"
+      type="font/woff2"
+      crossorigin
+    />
     <link rel="stylesheet" href="./styles.css" />
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "Person",
+        "name": "Antonette Petallo",
+        "url": "https://antonettepetallo.com/",
+        "jobTitle": "IT Analyst",
+        "worksFor": { "@type": "Organization", "name": "McMaster University" },
+        "sameAs": [
+          "https://github.com/Zynette",
+          "https://www.linkedin.com/in/antonette-petallo/"
+        ]
+      }
+    </script>
+    <script src="./script.js" defer></script>
   </head>
-
-  <body class="theme-aurora mode-dark" id="top">
-    <!-- My starry canvas backdrop lives here -->
-    <canvas id="sky" aria-hidden="true"></canvas>
-
-    <!-- Sparkle layer so every click feels a little magical -->
-    <div id="sparkles" aria-hidden="true"></div>
-
-    <!-- Floating stickers that keep the playful vibe alive -->
-    <button
-      class="sticker star mode-toggle"
-      id="modeToggle"
-      type="button"
-      aria-label="Toggle light mode"
-      aria-pressed="false"
-    >
-      <span class="mode-toggle__icon mode-toggle__icon--moon">★</span>
-      <span class="mode-toggle__icon mode-toggle__icon--sun">☀</span>
-    </button>
-
-    <!-- Sticky nav so folks can zip around the page -->
-    <header class="nav glass">
-      <a href="#top" class="brand">
-        <span class="mark">A</span>ntonette<span class="blink">_</span>
-      </a>
-      <button
-        class="nav-toggle"
-        id="navToggle"
-        type="button"
-        aria-label="Toggle navigation"
-        aria-controls="navMenu"
-        aria-expanded="false"
+  <body id="top">
+    <a class="skip-link" href="#main">Skip to content</a>
+    <header class="site-header wrap">
+      <a class="brand" href="./index.html" aria-label="Antonette Petallo, home"
+        ><span class="monogram" aria-hidden="true">ap<span>↗</span></span
+        ><span>Antonette<br />Petallo</span></a
       >
-        <span class="nav-toggle__bar"></span>
-        <span class="nav-toggle__bar"></span>
-        <span class="nav-toggle__bar"></span>
+      <button
+        class="menu-toggle"
+        aria-expanded="false"
+        aria-controls="navigation"
+        hidden
+      >
+        Menu <span aria-hidden="true">+</span>
       </button>
-      <nav class="nav-menu" id="navMenu">
-        <a href="#about">About</a>
-        <a href="#skills">Skills</a>
-        <a href="#projects">Projects</a>
-        <a href="#experience">Experience</a>
-        <a href="#education">Education</a>
-        <a href="#contact">Collaborate</a>
-        <div class="palette">
-          <button class="chip" data-theme="theme-aurora" title="Aurora">
-            Aurora
-          </button>
-          <button class="chip" data-theme="theme-sakura" title="Sakura">
-            Sakura
-          </button>
-          <button class="chip" data-theme="theme-isla" title="Isla">
-            Isla
-          </button>
-        </div>
+      <nav id="navigation" aria-label="Main navigation">
+        <a href="#work">Work <span>01</span></a
+        ><a href="#approach">Approach <span>02</span></a
+        ><a href="#experience">Experience <span>03</span></a
+        ><a class="nav-contact" href="#contact"
+          >Let’s talk <span aria-hidden="true">↗</span></a
+        >
       </nav>
     </header>
-
-    <!-- Hero section: photo + the quick intro -->
-    <section class="hero">
-      <div class="hero-inner hero-grid">
-        <!-- Column A: my faux Polaroid moment -->
-        <figure class="polaroid glass reveal">
-          <img
-            src="https://picsum.photos/600/700?random=3"
-            alt="Antonette tech workspace mock photo"
-          />
-          <figcaption>
-            Hi, I’m Antonette! I keep systems & people happy.
-          </figcaption>
-        </figure>
-
-        <!-- Column B: where I talk through who I am -->
-        <div class="hero-copy">
-          <h1 class="headline">
-            <span id="typewriter">Antonette Petallo_</span>
-          </h1>
-          <p class="subheadline">
-            IT Support Analyst & Technical Problem-Solver
-            <br />
-            <i>patient, resourceful, and obsessed with clarity.</i>
+    <main id="main">
+      <section class="hero wrap" aria-labelledby="hero-heading">
+        <div class="hero-top">
+          <p class="eyebrow">
+            <span class="status-dot" aria-hidden="true"></span> IT ANALYST AT
+            McMASTER UNIVERSITY
           </p>
-          <p class="tagline">
-            I help people feel confident with their technology
-            <br />
-            <i>
-              whether that means fixing issues, simplifying processes, or
-              creating better workflows.
-            </i>
-          </p>
-
-          <div class="hero-actions">
-            <a
-              class="btn"
-              href="https://www.linkedin.com/in/antonette-petallo/"
-              target="_blank"
-              rel="noopener"
-              >LinkedIn</a
-            >
-            <a
-              class="btn secondary"
-              href="https://github.com/Zynette"
-              target="_blank"
-              rel="noopener"
-              >GitHub</a
-            >
-            <a
-              class="btn outline"
-              href="./Antonette_Petallo_ITSupport_Resume.pdf"
-              download
-              >Download Résumé</a
-            >
-          </div>
-
-          <div class="chips">
-            <span class="chip-pink">Support</span>
-            <span class="chip-blue">Develop</span>
-            <span class="chip-green">Innovate</span>
-          </div>
+          <p class="location">Hamilton, Ontario · Canada</p>
         </div>
-      </div>
-    </section>
-
-    <!-- About section: sharing the story behind the tech skills -->
-    <section id="about" class="section">
-      <header class="section-head">
-        <h2>Behind the Screens</h2>
-        <p class="accent-script">precision + empathy</p>
-      </header>
-
-      <div class="grid two">
-        <div class="card glass reveal">
-          <p>
-            My journey in IT really started from me constantly wondering “why is
-            this broken and how do I fix it?” I didn’t grow up surrounded by
-            tech, but I’ve always been the person who wants to understand things
-            deeply and make them less confusing for others. Over time, that
-            curiosity turned into a mix of technical support, problem-solving,
-            documenting fixes, and helping people feel calm when something stops
-            working.
-          </p>
-          <p>
-            I’ve supported users at McMaster University’s UTS Service Desk,
-            written clearer how-to steps, handled daily Windows/macOS issues,
-            and built small tools to make workflows smoother. What keeps me
-            motivated is simple — taking someone from stressed or overwhelmed to
-            relieved, with a fix that feels clear and human. I genuinely enjoy
-            turning messy problems into something easy, understandable, and a
-            little lighter for the person on the other end.
-          </p>
-        </div>
-
-        <div class="card glass">
-          <ul class="timeline">
-            <li>
-              <span>Future</span>
-              <p>
-                IT Specialist: automation, identity, and service reliability
-              </p>
-            </li>
-            <li>
-              <span>2025</span>
-              <p>Portfolio & project expansion: Support + Web + DB</p>
-            </li>
-            <li>
-              <span>2024–Now</span>
-              <p>McMaster UTS | Client Services</p>
-            </li>
-            <li>
-              <span>2023–2024</span>
-              <p>Admin & IT Support | Sun Life Canada, Roam & Journey Travel</p>
-            </li>
-            <li>
-              <span>2021–2023</span>
-              <p>BSIT – Business Analytics (Philippines)</p>
-            </li>
-          </ul>
-        </div>
-      </div>
-    </section>
-
-    <!-- How I Work: the calm-support philosophy section -->
-    <section id="how-i-work" class="section">
-      <header class="section-head">
-        <h2>How I Work</h2>
-        <p class="accent-script">support that feels calm, clear, and human</p>
-      </header>
-
-      <div class="grid two">
-        <article class="card glass reveal">
-          <h3>Support philosophy</h3>
-          <ul>
-            <li>
-              <strong>Clarity first.</strong> I take time to understand the real
-              problem before giving any steps. Clear guidance beats rushed
-              fixes.
-            </li>
-            <li>
-              <strong>Stay calm, even when users aren’t.</strong> Tech issues
-              can be stressful — my job is to make the experience feel
-              manageable and respectful.
-            </li>
-            <li>
-              <strong>Think before escalating.</strong> I walk through common
-              fixes, validated steps, and past KB entries before moving a case
-              up.
-            </li>
-          </ul>
-        </article>
-
-        <article class="card glass reveal">
-          <h3>Beyond “just closing tickets”</h3>
-          <ul>
-            <li>
-              <strong>Better documentation.</strong> I rewrite confusing fixes
-              into cleaner KB articles so the next analyst doesn’t start from
-              zero.
-            </li>
-            <li>
-              <strong>Workflow awareness.</strong> I look for patterns — what
-              keeps breaking, what slows users down, and what processes can be
-              simplified.
-            </li>
-            <li>
-              <strong>Follow-through matters.</strong> “Resolved” isn’t real
-              until the user confirms everything is working again.
-            </li>
-          </ul>
-        </article>
-      </div>
-    </section>
-
-    <!-- Skills overview with tools I reach for every day -->
-    <section id="skills" class="section">
-      <header class="section-head">
-        <h2>Skills & Tools</h2>
-        <p class="muted">
-          Hover for subtle motion • press 1–3 to play with themes.
-        </p>
-      </header>
-
-      <div class="skills-wrap">
-        <article class="skill-card glass reveal">
-          <h3>Technical</h3>
-          <ul>
-            <li>
-              <strong>Languages:</strong> HTML, CSS, JavaScript, C#, Python
-              (basic), SQL
-            </li>
-            <li>
-              <strong>Frameworks & Tools:</strong> ASP.NET Core, VS Code, Visual
-              Studio, GitHub
-            </li>
-            <li><strong>Databases:</strong> MySQL, Firestore, SQLite</li>
-            <li><strong>Support Tools:</strong> Jira, ServiceNow, Comm100</li>
-          </ul>
-        </article>
-
-        <article class="skill-card glass reveal">
-          <h3>IT Support & Systems</h3>
-          <ul>
-            <li>Active Directory & Azure AD</li>
-            <li>VPN, MFA, and identity troubleshooting</li>
-            <li>Windows & macOS endpoint support</li>
-            <li>Ticketing systems (Jira, ServiceNow, Comm100)</li>
-          </ul>
-        </article>
-
-        <article class="skill-card glass reveal">
-          <h3>Productivity & Design</h3>
-          <ul>
-            <li>Figma, Canva, MS Project</li>
-            <li>Documentation: Confluence, SharePoint, Notion</li>
-          </ul>
-        </article>
-
-        <article class="skill-card glass reveal">
-          <h3>Learning</h3>
-          <ul>
-            <li>Google IT Support (Coursera)</li>
-            <li>Networking, Database Theory, Web Apps, QA</li>
-          </ul>
-        </article>
-      </div>
-    </section>
-
-    <!-- Mini IT helpers I prototyped for fun -->
-    <section id="support-tools" class="section">
-      <header class="section-head">
-        <h2>Support Tools</h2>
-        <p class="muted">
-          Tiny helpers I’d reach for during a call — built with simple
-          JavaScript.
-        </p>
-      </header>
-
-      <div class="tools-grid">
-        <article class="card glass reveal">
-          <h3>Password strength check</h3>
-          <p class="muted">
-            I never ask for real passwords — but I can help users test stronger
-            patterns.
-          </p>
-          <input
-            id="pwInput"
-            type="password"
-            placeholder="Type a sample password pattern"
-          />
-          <p id="pwFeedback" class="muted small-text">
-            Waiting for you to type…
-          </p>
-        </article>
-
-        <article class="card glass reveal">
-          <h3>What are you using?</h3>
-          <p class="muted">
-            Useful when a caller isn’t sure if they’re on Windows, macOS, or
-            something else.
-          </p>
-          <div id="osInfo" class="os-pill">Detecting your OS…</div>
-        </article>
-
-        <article class="card glass reveal">
-          <h3>Friendly “ping” check</h3>
-          <p class="muted">
-            A playful mock ping test to explain latency in human language.
-          </p>
-          <button id="pingBtn" class="btn small" type="button">
-            Run ping test
-          </button>
-          <p id="pingStatus" class="muted small-text">
-            No ping yet — click the button.
-          </p>
-        </article>
-      </div>
-    </section>
-
-    <!-- Projects: demos + case studies with filters -->
-    <section id="projects" class="section">
-      <header class="section-head">
-        <h2>Projects & Demos</h2>
-        <p class="muted">
-          Switch view:
-          <button id="viewGrid" class="toggle on">Grid</button>
-          <button id="viewStories" class="toggle">Case Studies</button>
-        </p>
-
-        <!-- Search + filters so people can find the right project fast -->
-        <div class="project-filters">
-          <input
-            id="projectSearch"
-            type="search"
-            placeholder="Search by title, tools, or focus (e.g., 'VPN', 'Firebase', 'support')"
-          />
-          <div id="projectFilters" class="filter-chips">
-            <button class="chip small on" data-filter="all">All</button>
-            <button class="chip small" data-filter="IT Support">
-              IT Support
-            </button>
-            <button class="chip small" data-filter="Web">Web</button>
-            <button class="chip small" data-filter="Database">Database</button>
-            <button class="chip small" data-filter="Advanced">Advanced</button>
-          </div>
-        </div>
-      </header>
-
-      <div id="projectGrid" class="project-grid"></div>
-      <div id="projectStories" class="project-stories hidden"></div>
-    </section>
-
-    <!-- Wins section where I brag about real impact -->
-    <section id="wins" class="section">
-      <header class="section-head">
-        <h2>Wins I’m Proud Of</h2>
-        <p class="accent-script">small experiments → real impact</p>
-      </header>
-
-      <div class="wins-grid">
-        <article class="card glass reveal">
-          <h3>35% more Dustless Living leads</h3>
-          <p class="muted">
-            Rebuilt my service website, refined messaging, and optimized ads...
-            resulting in a ~35% increase in qualified leads and clearer
-            expectations before booking.
-          </p>
-        </article>
-
-        <article class="card glass reveal">
-          <h3>20+ tickets/day with calm support</h3>
-          <p class="muted">
-            Resolved 20+ daily issues at McMaster UTS across VPN, MFA, device
-            configuration, and software installs — all while maintaining
-            accuracy and calm communication.
-          </p>
-        </article>
-
-        <article class="card glass reveal">
-          <h3>Cleaner documentation & KB</h3>
-          <p class="muted">
-            Turned scattered notes into clean SOPs and KB articles, helping
-            analysts (and future me) solve recurring issues faster.
-          </p>
-        </article>
-
-        <article class="card glass reveal">
-          <h3>Dean’s List & peer support</h3>
-          <p class="muted">
-            Earned Dean’s List in BSIT – Business Analytics. Also supported
-            classmates at Mohawk in SQL, networking, and HTML/CSS.
-          </p>
-        </article>
-      </div>
-    </section>
-
-    <!-- Experience timeline -->
-    <section id="experience" class="section">
-      <header class="section-head">
-        <h2>Hands-on Experience</h2>
-      </header>
-
-      <div class="experience">
-        <article class="xp card glass reveal">
-          <div class="xp-head">
-            <h3>McMaster University — UTS Client Services</h3>
-            <span class="when">2025</span>
-          </div>
-          <p>
-            Delivered consistent phone/chat/Jira support — handling 20+ tickets
-            per day across Windows, macOS, VPN, MFA, SSO, and software
-            troubleshooting. Contributed to clearer documentation and improved
-            ticket accuracy.
-          </p>
-        </article>
-
-        <article class="xp card glass reveal">
-          <div class="xp-head">
-            <h3>Dustless Living — Owner / IT & Ops</h3>
-            <span class="when">2024–Present</span>
-          </div>
-          <p>
-            Built and maintained a small-business tech setup: website, ads, CRM
-            tracking, Fongo VoIP routing, and light automation for scheduling
-            and invoicing.
-          </p>
-        </article>
-
-        <article class="xp card glass reveal">
-          <div class="xp-head">
-            <h3>Sun Life Insurance Canada — Administrative Assistant</h3>
-            <span class="when">2024</span>
-          </div>
-          <p>
-            Managed digital files, client data, and ServiceNow workflows while
-            ensuring accuracy, confidentiality, and strong organization.
-          </p>
-        </article>
-      </div>
-    </section>
-
-    <!-- Education + certificates split -->
-    <section id="education" class="section">
-      <header class="section-head">
-        <h2>Education & Certifications</h2>
-      </header>
-
-      <div class="grid two">
-        <div class="card glass reveal">
-          <h3>Education</h3>
-          <ul class="edu-list">
-            <li>
-              <strong
-                >Mohawk College — Computer Systems Technician, Software
-                Support</strong
+        <div class="hero-grid">
+          <div class="hero-copy">
+            <h1 id="hero-heading">
+              Complex systems.<br />A <em>human</em><br />approach<span
+                class="orange"
+                >.</span
               >
-              <span class="edu-note">(Expected Dec 2025)</span>
-              <p>
-                Focus: Networking, Security, Web Applications, Databases, IT
-                Support.
-              </p>
-              <div class="edu-links">
-                <a
-                  class="btn outline small"
-                  href="https://www.mohawkcollege.ca/programs/technology/computer-systems-technician-software-support-559"
-                  target="_blank"
-                  rel="noopener"
-                  >View Program Page</a
-                >
-                <a
-                  class="btn outline small"
-                  href="https://www.mohawkcollege.ca/programs/technology/computer-systems-technician-software-support-559/curriculum"
-                  target="_blank"
-                  rel="noopener"
-                  >View Curriculum</a
-                >
-                <a
-                  class="btn outline small"
-                  href="https://www.mohawkcollege.ca/"
-                  target="_blank"
-                  rel="noopener"
-                  >School Website</a
-                >
-              </div>
-            </li>
-            <li>
-              <strong
-                >Batangas State University — BSIT, Major in Business
-                Analytics</strong
+            </h1>
+            <p class="hero-intro">
+              I’m Antonette. I support the systems people depend on — and build
+              tools that make everyday work clearer.
+            </p>
+            <div class="hero-actions">
+              <a class="button dark" href="#work"
+                >Explore my work <span aria-hidden="true">↘</span></a
+              ><a class="text-link" href="./resume.html"
+                >Résumé <span aria-hidden="true">↗</span></a
               >
-              <span class="edu-note">(Dean’s List)</span>
-              <div class="edu-links">
-                <a
-                  class="btn outline small"
-                  href="https://batstate-u.edu.ph/academic-programs/bs-information-technology/"
-                  target="_blank"
-                  rel="noopener"
-                  >View Program Page</a
+            </div>
+          </div>
+          <figure class="hero-art">
+            <div class="art-top">
+              <span class="eyebrow">THE WAY I SEE IT</span
+              ><span class="art-no">FIG. 01</span>
+            </div>
+            <svg
+              class="clarity-art"
+              viewBox="0 0 480 420"
+              role="img"
+              aria-labelledby="clarity-title clarity-desc"
+            >
+              <title id="clarity-title">From complexity to clarity</title>
+              <desc id="clarity-desc">
+                Four overlapping paths become four ordered lines, representing
+                people, applications, access and process coming together.
+              </desc>
+              <defs>
+                <pattern
+                  id="art-grid"
+                  width="24"
+                  height="24"
+                  patternUnits="userSpaceOnUse"
                 >
-                <a
-                  class="btn outline small"
-                  href="https://batstate-u.edu.ph/academic-programs/bs-information-technology/bsit-curriculum/"
-                  target="_blank"
-                  rel="noopener"
-                  >View Curriculum</a
-                >
-                <a
-                  class="btn outline small"
-                  href="https://batstate-u.edu.ph/"
-                  target="_blank"
-                  rel="noopener"
-                  >School Website</a
-                >
-              </div>
-            </li>
-          </ul>
+                  <circle cx="1" cy="1" r=".7" fill="#bbbdb2" />
+                </pattern>
+              </defs>
+              <rect width="480" height="420" fill="url(#art-grid)" />
+              <g class="art-paths" fill="none" stroke-width="1.5">
+                <path d="M24 108 C190 108 68 342 243 202 S315 121 450 121" />
+                <path d="M24 174 C150 174 110 38 238 202 S326 177 450 177" />
+                <path d="M24 240 C181 240 88 342 238 202 S322 233 450 233" />
+                <path d="M24 306 C198 306 102 68 238 202 S325 289 450 289" />
+              </g>
+              <g
+                class="art-highlight"
+                fill="none"
+                stroke="#bd3c23"
+                stroke-width="3"
+              >
+                <path d="M24 174 C150 174 110 38 238 202 S326 177 450 177" />
+              </g>
+              <circle
+                cx="238"
+                cy="202"
+                r="61"
+                fill="#f3f1e9"
+                stroke="#20221f"
+              />
+              <circle cx="238" cy="202" r="51" fill="none" stroke="#c9cabe" />
+              <path
+                d="M217 201h42m-16-16 16 16-16 16"
+                fill="none"
+                stroke="#bd3c23"
+                stroke-width="2.5"
+              />
+              <g fill="#20221f">
+                <circle cx="24" cy="108" r="4" />
+                <circle cx="24" cy="174" r="4" />
+                <circle cx="24" cy="240" r="4" />
+                <circle cx="24" cy="306" r="4" />
+              </g>
+              <g fill="#bd3c23">
+                <circle cx="450" cy="121" r="4" />
+                <circle cx="450" cy="177" r="4" />
+                <circle cx="450" cy="233" r="4" />
+                <circle cx="450" cy="289" r="4" />
+              </g>
+              <g
+                class="art-labels"
+                fill="#5c6257"
+                font-size="11"
+                letter-spacing="1.2"
+              >
+                <text x="24" y="77">COMPLEXITY</text>
+                <text x="373" y="77">CLARITY</text>
+                <text x="203" y="290">UNDERSTAND.</text>
+                <text x="210" y="308">CONNECT.</text>
+                <text x="216" y="326">SIMPLIFY.</text>
+              </g>
+            </svg>
+            <figcaption>
+              <span
+                >Technology makes more sense<br />when you start with
+                people.</span
+              ><a
+                href="#approach"
+                aria-label="Explore how I approach a support problem"
+                >Follow the process <span aria-hidden="true">↗</span></a
+              >
+            </figcaption>
+          </figure>
         </div>
-        <div class="card glass reveal">
-          <h3>Certificates & Courses</h3>
-          <ul class="cert-list">
-            <li>Generative AI Fundamentals — Databricks</li>
-            <li>Google IT Support (Coursera)</li>
-            <li>Customer Service Foundations</li>
-            <li>IT Service Desk: Service Management</li>
-          </ul>
+        <div class="hero-bottom">
+          <p>
+            Enterprise IT <span aria-hidden="true">/</span> Application support
+            <span aria-hidden="true">/</span> Independent software
+          </p>
+          <a href="#work" class="scroll-note"
+            >SCROLL TO EXPLORE <span aria-hidden="true">↓</span></a
+          >
         </div>
-      </div>
-
-      <!-- Learning roadmap (what I’m playing with next) -->
-      <div class="card glass learning-roadmap reveal">
-        <h3>What I’m Learning Next</h3>
-        <ul class="learning-list">
-          <li>
-            <strong>System administration & automation.</strong>
-            More PowerShell scripting and Windows Server tasks to reduce
-            repetitive work.
-          </li>
-          <li>
-            <strong>Azure AD & IAM.</strong>
-            Deeper into identity, conditional access, and secure onboarding
-            flows.
-          </li>
-          <li>
-            <strong>Advanced Firebase & security rules.</strong>
-            Hardening auth/Firestore rules for real-world, multi-role apps.
-          </li>
-          <li>
-            <strong>Incident documentation & SRE-style thinking.</strong>
-            Turning incidents into long-term reliability improvements.
-          </li>
-        </ul>
-      </div>
-    </section>
-
-    <!-- Contact form for folks who want to collaborate -->
-    <section id="contact" class="section">
-      <header class="section-head">
-        <h2>Collaborate & Support</h2>
-        <p class="accent-script">Let’s build something thoughtful.</p>
-      </header>
-
-      <form
-        id="contactForm"
-        class="contact card glass reveal"
-        onsubmit="return false;"
+      </section>
+      <section
+        id="work"
+        class="work-section wrap section-space"
+        aria-labelledby="work-heading"
       >
-        <div class="field">
-          <label for="name">Name</label>
-          <input id="name" name="name" placeholder="Your name" required />
+        <div class="section-heading">
+          <p class="eyebrow">
+            <span class="section-index">01 /</span> SELECTED WORK
+          </p>
+          <div class="heading-row">
+            <h2 id="work-heading">Built around<br /><em>real problems.</em></h2>
+            <p>
+              A service website, an API-driven app, a study in software
+              structure — and what I’m thinking about next.
+            </p>
+          </div>
         </div>
-        <div class="field">
-          <label for="email">Email</label>
-          <input
-            id="email"
-            name="email"
-            type="email"
-            placeholder="you@example.com"
-            required
-          />
+        <div class="work-controls" hidden>
+          <div class="filter-group" role="group" aria-label="Filter projects">
+            <button data-filter="all" aria-pressed="true">
+              All work <span>04</span></button
+            ><button data-filter="implemented" aria-pressed="false">
+              Implemented <span>03</span></button
+            ><button data-filter="concept" aria-pressed="false">
+              In exploration <span>01</span>
+            </button>
+          </div>
+          <div class="search-wrap">
+            <label class="sr-only" for="work-search">Search projects</label
+            ><input
+              id="work-search"
+              type="search"
+              placeholder="Search work"
+              autocomplete="off"
+            /><span aria-hidden="true">⌕</span>
+          </div>
         </div>
-        <div class="field">
-          <label for="message">Message</label>
-          <textarea
-            id="message"
-            name="message"
-            placeholder="What do you want to build or fix together?"
-            required
-          ></textarea>
+        <p
+          id="result-count"
+          class="result-count"
+          role="status"
+          aria-live="polite"
+        ></p>
+        <div id="work-list">
+          <article
+            class="work-item featured"
+            data-category="implemented"
+            data-search="online technical help html css javascript node service website forms support"
+          >
+            <a
+              class="project-visual help-visual"
+              href="./work/online-technical-help.html"
+              tabindex="-1"
+              aria-hidden="true"
+              ><div class="visual-caption">
+                <span>01 — SERVICE DESIGN & DEVELOPMENT</span><span>↗</span>
+              </div>
+              <div class="help-preview">
+                <img
+                  src="./assets/online-technical-help.webp"
+                  alt=""
+                  width="1280"
+                  height="550"
+                  loading="lazy"
+                  decoding="async"
+                />
+              </div>
+              <span class="visual-footnote"
+                >Actual homepage capture · development build</span
+              ></a
+            >
+            <div class="project-info">
+              <div>
+                <p class="project-category">WEB APPLICATION · IN DEVELOPMENT</p>
+                <h3>
+                  <a href="./work/online-technical-help.html"
+                    >Online Technical Help <span aria-hidden="true">↗</span></a
+                  >
+                </h3>
+                <p>
+                  A clearer path from “something’s broken” to a well-scoped
+                  support request.
+                </p>
+              </div>
+              <div class="project-meta">
+                <span>HTML / CSS / JavaScript / Node.js</span
+                ><a class="text-link" href="./work/online-technical-help.html"
+                  >View project <span aria-hidden="true">↗</span></a
+                >
+              </div>
+            </div>
+          </article>
+          <div class="work-pair">
+            <article
+              class="work-item"
+              data-category="implemented"
+              data-search="aurora weather react native expo javascript open meteo api geocoding forecast mobile"
+            >
+              <a
+                class="project-visual weather-visual"
+                href="./work/aurora-weather.html"
+                tabindex="-1"
+                aria-hidden="true"
+                ><div class="visual-caption">
+                  <span>02 — MOBILE & API INTEGRATION</span><span>↗</span>
+                </div>
+                <div class="weather-diagram">
+                  <p class="weather-word">Aurora<span>Weather</span></p>
+                  <div class="api-route">
+                    <span>City search</span><i>↓</i><span>Coordinates</span
+                    ><i>↓</i
+                    ><span class="route-end">Hourly forecast <b>↗</b></span>
+                  </div>
+                  <div class="weather-orbit" aria-hidden="true">
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                  </div>
+                </div>
+                <span class="visual-footnote"
+                  >Source-derived API flow · no live weather data</span
+                ></a
+              >
+              <div class="project-info">
+                <div>
+                  <p class="project-category">
+                    MOBILE APPLICATION · LEARNING PROJECT
+                  </p>
+                  <h3>
+                    <a href="./work/aurora-weather.html"
+                      >Aurora Weather <span aria-hidden="true">↗</span></a
+                    >
+                  </h3>
+                  <p>Turning a city name into a readable hourly forecast.</p>
+                </div>
+                <div class="project-meta">
+                  <span>React Native / Expo / Open-Meteo</span
+                  ><a class="text-link" href="./work/aurora-weather.html"
+                    >View project <span aria-hidden="true">↗</span></a
+                  >
+                </div>
+              </div>
+            </article>
+            <article
+              class="work-item"
+              data-category="implemented"
+              data-search="media library c# dotnet console interfaces abstract classes search file educational software"
+            >
+              <a
+                class="project-visual media-visual"
+                href="./work/media-library.html"
+                tabindex="-1"
+                aria-hidden="true"
+                ><div class="visual-caption">
+                  <span>03 — SOFTWARE FUNDAMENTALS</span><span>↗</span>
+                </div>
+                <div class="media-diagram">
+                  <div class="media-parent">
+                    Media <small>ABSTRACT CLASS</small>
+                  </div>
+                  <div class="media-branches">
+                    <span>Book</span><span>Movie</span><span>Song</span>
+                  </div>
+                  <p>Different objects.<br /><em>One shared contract.</em></p>
+                </div>
+                <span class="visual-footnote"
+                  >Class structure from the C# source</span
+                ></a
+              >
+              <div class="project-info">
+                <div>
+                  <p class="project-category">
+                    C# CONSOLE APPLICATION · COURSEWORK
+                  </p>
+                  <h3>
+                    <a href="./work/media-library.html"
+                      >Media Library <span aria-hidden="true">↗</span></a
+                    >
+                  </h3>
+                  <p>
+                    Exploring interfaces, inheritance and searchable
+                    collections.
+                  </p>
+                </div>
+                <div class="project-meta">
+                  <span>C# / .NET Framework / File I/O</span
+                  ><a class="text-link" href="./work/media-library.html"
+                    >View project <span aria-hidden="true">↗</span></a
+                  >
+                </div>
+              </div>
+            </article>
+          </div>
+          <article
+            class="work-item concept-item"
+            data-category="concept"
+            data-search="careeros ai career development planning product design study concept pathways"
+          >
+            <div class="concept-mark" aria-hidden="true">c<span>↗</span></div>
+            <div>
+              <p class="project-category">04 / IN EXPLORATION</p>
+              <h3>
+                <a href="./work/careeros.html"
+                  >CareerOS <span aria-hidden="true">↗</span></a
+                >
+              </h3>
+              <p>
+                What would a more personal path through career development look
+                like?
+              </p>
+            </div>
+            <div class="concept-status">
+              <span>Product design study</span
+              ><a class="text-link" href="./work/careeros.html"
+                >Explore the thinking <span aria-hidden="true">↗</span></a
+              >
+            </div>
+          </article>
         </div>
-        <div class="actions">
-          <button class="btn" id="sendBtn">Send</button>
-          <span id="formMsg" class="muted"></span>
+        <div class="empty-state" hidden>
+          <h3>No matching projects.</h3>
+          <p>Try a different search or return to the full selection.</p>
+          <button class="button dark" id="reset-work">
+            Reset filters <span aria-hidden="true">↗</span>
+          </button>
         </div>
-      </form>
-    </section>
-
-    <!-- Footer with the friendly sign-off -->
-    <footer class="footer glass">
-      <div>© <span id="year"></span> Antonette Petallo</div>
-      <div class="footer-links">
-        <a
-          href="https://www.linkedin.com/in/antonette-petallo/"
-          target="_blank"
-          rel="noopener"
-          >LinkedIn</a
-        >
-        <a href="https://github.com/Zynette" target="_blank" rel="noopener"
-          >GitHub</a
-        >
-        <a href="./Antonette_Petallo_ITSupport_Resume.pdf" download>Résumé</a>
-      </div>
-      <p class="muted tiny-note">
-        If you’re building something helpful for people, I’d love to be part of
-        it.
-      </p>
+        <div class="work-end">
+          <p>A considered selection. More experiments on GitHub.</p>
+          <a
+            class="text-link"
+            href="https://github.com/Zynette"
+            target="_blank"
+            rel="noopener noreferrer"
+            >Explore repositories <span aria-hidden="true">↗</span></a
+          >
+        </div>
+      </section>
+      <section
+        id="approach"
+        class="approach-section section-space"
+        aria-labelledby="approach-heading"
+      >
+        <div class="wrap">
+          <div class="section-heading">
+            <p class="eyebrow">
+              <span class="section-index">02 /</span> THE THINKING BEHIND THE
+              FIX
+            </p>
+            <div class="heading-row">
+              <h2 id="approach-heading">
+                Start with the person.<br /><em>Then trace the system.</em>
+              </h2>
+              <p>
+                A fix matters when someone can get back to what they were trying
+                to do. Here’s how I work towards that.
+              </p>
+            </div>
+          </div>
+          <div class="trace-shell">
+            <div class="trace-intro">
+              <span class="eyebrow">AN ILLUSTRATIVE WALKTHROUGH</span>
+              <p>“I can sign in.<br />Why can’t I open the app?”</p>
+              <span class="trace-note"
+                >Fictional scenario. No live diagnostics or university
+                data.</span
+              >
+            </div>
+            <div class="trace-explorer">
+              <div
+                class="trace-controls"
+                role="group"
+                aria-label="Explore the support process"
+                hidden
+              >
+                <button data-step="0" aria-pressed="true">
+                  01 <span>Understand</span></button
+                ><button data-step="1" aria-pressed="false">
+                  02 <span>Isolate</span></button
+                ><button data-step="2" aria-pressed="false">
+                  03 <span>Resolve</span></button
+                ><button data-step="3" aria-pressed="false">
+                  04 <span>Document</span>
+                </button>
+              </div>
+              <div class="trace-map" data-stage="0">
+                <svg
+                  viewBox="0 0 600 130"
+                  role="img"
+                  aria-label="A support request connects the person, identity, application and the next person who needs the answer"
+                >
+                  <path class="trace-line" d="M60 65H540" />
+                  <path class="trace-active" d="M60 65H540" />
+                  <g class="trace-node node-0">
+                    <circle cx="60" cy="65" r="26" />
+                    <text x="60" y="71">01</text>
+                  </g>
+                  <g class="trace-node node-1">
+                    <circle cx="220" cy="65" r="26" />
+                    <text x="220" y="71">02</text>
+                  </g>
+                  <g class="trace-node node-2">
+                    <circle cx="380" cy="65" r="26" />
+                    <text x="380" y="71">03</text>
+                  </g>
+                  <g class="trace-node node-3">
+                    <circle cx="540" cy="65" r="26" />
+                    <text x="540" y="71">04</text>
+                  </g>
+                </svg>
+                <div class="trace-labels" aria-hidden="true">
+                  <span>Person</span><span>Access</span><span>Application</span
+                  ><span>Knowledge</span>
+                </div>
+              </div>
+              <div
+                id="trace-panel"
+                class="trace-panel"
+                role="status"
+                aria-live="polite"
+              >
+                <span class="eyebrow">01 / UNDERSTAND</span>
+                <h3>Get the whole picture.</h3>
+                <p>
+                  What were you trying to do? What changed? I clarify the
+                  symptom and its impact before deciding where to look.
+                </p>
+              </div>
+            </div>
+          </div>
+          <ol class="process-fallback">
+            <li>
+              <h3>Understand the problem</h3>
+              <p>Clarify the symptom, what changed, and the person’s goal.</p>
+            </li>
+            <li>
+              <h3>Isolate the cause</h3>
+              <p>
+                Separate sign-in, permissions and application behaviour. Test
+                one assumption at a time.
+              </p>
+            </li>
+            <li>
+              <h3>Resolve and verify</h3>
+              <p>
+                Use an approved change or give the right team clear evidence.
+                Ask the person to confirm the original task works.
+              </p>
+            </li>
+            <li>
+              <h3>Document for next time</h3>
+              <p>
+                Record the symptom, checks and resolution. Make the next
+                investigation easier.
+              </p>
+            </li>
+          </ol>
+        </div>
+      </section>
+      <section
+        id="experience"
+        class="experience-section wrap section-space"
+        aria-labelledby="experience-heading"
+      >
+        <div class="experience-layout">
+          <div class="experience-lead">
+            <p class="eyebrow">
+              <span class="section-index">03 /</span> EXPERIENCE
+            </p>
+            <h2 id="experience-heading">
+              Grounded in<br /><em>the everyday.</em>
+            </h2>
+            <p>
+              Working where technology meets real operations, real questions and
+              people who need things to work.
+            </p>
+            <a class="text-link" href="./resume.html"
+              >View my résumé <span aria-hidden="true">↗</span></a
+            >
+          </div>
+          <div class="career-timeline">
+            <article class="career-entry current">
+              <div class="career-date">
+                <span>February 2026 — Present</span
+                ><span class="current-label">CURRENT</span>
+              </div>
+              <h3>IT Analyst</h3>
+              <p class="career-org">
+                McMaster University · Hospitality Services
+              </p>
+              <p>
+                I support enterprise applications and operational workflows,
+                troubleshoot issues, work through access and permissions, and
+                coordinate with users, stakeholders and vendors.
+              </p>
+              <p class="career-tools">
+                Jira Service Management · Dynamics 365 ESM<br />OneCard /
+                TouchNet · Microsoft 365
+              </p>
+            </article>
+            <article class="career-entry">
+              <div class="career-date">
+                <span>January 2025 — January 2026</span>
+              </div>
+              <h3>IT Technical Assistant</h3>
+              <p class="career-org">
+                McMaster University · University Technology Services
+              </p>
+              <p>
+                Supported users with Windows and macOS issues, account access,
+                software and connectivity. Documented investigations and worked
+                with other support teams when issues needed escalation.
+              </p>
+            </article>
+          </div>
+        </div>
+        <div class="capabilities">
+          <p class="eyebrow">WHAT I BRING TO THE WORK</p>
+          <div class="capability-row">
+            <span class="cap-number">01</span>
+            <h3>Enterprise systems & service</h3>
+            <p>
+              Application support, access and permissions, incident triage,
+              stakeholder and vendor communication.
+            </p>
+          </div>
+          <div class="capability-row">
+            <span class="cap-number">02</span>
+            <h3>Practical software development</h3>
+            <p>
+              HTML, CSS, JavaScript, Node.js, React Native and C# — applied in
+              the projects above.
+            </p>
+          </div>
+          <div class="capability-row">
+            <span class="cap-number">03</span>
+            <h3>Clarity that lasts</h3>
+            <p>
+              Troubleshooting notes, user guidance, reusable documentation and
+              careful follow-through.
+            </p>
+          </div>
+        </div>
+      </section>
+      <section id="about" class="about-section section-space">
+        <div class="wrap about-grid">
+          <div class="about-title">
+            <p class="eyebrow">THE PERSON BEHIND THE PROCESS</p>
+            <h2>
+              Curious about<br />how it works.<br /><em
+                >Mindful of who<br />it works for.</em
+              >
+            </h2>
+            <span class="about-signature">Antonette.</span>
+          </div>
+          <div class="about-copy">
+            <p class="large-copy">
+              I like the moment a complicated problem starts to make sense.
+            </p>
+            <p>
+              In IT, that often starts with listening: understanding what
+              someone needs, checking what the system is doing, and explaining
+              the next step clearly. Building software gives me another way to
+              work on those same problems.
+            </p>
+            <p>
+              I use AI tools in my independent development work to explore
+              options, write code and iterate. My responsibility is to question
+              the output, understand the decisions and test what actually
+              happens.
+            </p>
+            <div class="education-note">
+              <p class="eyebrow">FOUNDATIONS</p>
+              <p>
+                Computer Systems Technician — Software Support studies<br /><span
+                  >Mohawk College, Hamilton</span
+                >
+              </p>
+              <p>
+                Information Technology — Business Analytics studies<br /><span
+                  >Batangas State University, Philippines</span
+                >
+              </p>
+            </div>
+            <p class="exploration-note">
+              Also exploring: Kitchenly, an idea for more connected meal
+              planning and household organisation. It’s an experiment, with no
+              public release claimed.
+            </p>
+          </div>
+        </div>
+      </section>
+      <section
+        id="contact"
+        class="contact-section wrap section-space"
+        aria-labelledby="contact-heading"
+      >
+        <p class="eyebrow">
+          <span class="section-index">04 /</span> LET’S CONNECT
+        </p>
+        <div class="contact-heading-row">
+          <h2 id="contact-heading">Something to<br /><em>figure out?</em></h2>
+          <span class="contact-arrow" aria-hidden="true">↗</span>
+        </div>
+        <div class="contact-bottom">
+          <p>
+            A role, a practical project, or a problem worth understanding. I’d
+            like to hear about it.
+          </p>
+          <div class="contact-actions">
+            <a class="email-link" href="mailto:antonettepetallo73@gmail.com"
+              >antonettepetallo73@gmail.com
+              <span aria-hidden="true">↗</span></a
+            >
+            <div class="contact-secondary">
+              <button class="copy-email" hidden>
+                Copy email <span aria-hidden="true">+</span></button
+              ><a
+                class="text-link"
+                href="https://www.linkedin.com/in/antonette-petallo/"
+                target="_blank"
+                rel="noopener noreferrer"
+                >LinkedIn <span aria-hidden="true">↗</span></a
+              ><span id="copy-status" role="status" aria-live="polite"></span>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+    <footer class="site-footer wrap">
+      <p>© <span id="year">2026</span> Antonette Petallo</p>
+      <p>Clarity, by design.</p>
+      <a href="#top">Back to top <span aria-hidden="true">↑</span></a>
     </footer>
-
-    <!-- Tiny helper bubble for quick project suggestions -->
-    <button
-      id="assistantBubble"
-      class="assistant-bubble glass"
-      type="button"
-      aria-label="Need help picking a project?"
-    >
-      💬
-    </button>
-
-    <div
-      id="assistantPanel"
-      class="assistant-panel glass hidden"
-      aria-hidden="true"
-    >
-      <p class="muted assistant-title">Need help picking a project?</p>
-      <div class="assistant-actions">
-        <button
-          type="button"
-          class="btn small outline"
-          data-assist="IT Support"
-        >
-          Show IT Support
-        </button>
-        <button type="button" class="btn small outline" data-assist="Web">
-          Show Web
-        </button>
-        <button type="button" class="btn small outline" data-assist="Database">
-          Show Database
-        </button>
-        <button type="button" class="btn small" id="assistantRandom">
-          Surprise me
-        </button>
-      </div>
-    </div>
-
-    <!-- Quick dock so mobile visitors can jump around easily -->
-    <div class="dock glass">
-      <a class="dock-btn" href="#projects" title="Projects">📁</a>
-      <a class="dock-btn" href="#contact" title="Contact">✉️</a>
-      <button class="dock-btn" id="toTop" title="Top">⤴︎</button>
-    </div>
-
-    <!-- Project data injected for the JS render -->
-    <script>
-      window.projects = [
-        {
-          id: "helpdesk-demo",
-          title: "Help Desk Ticket System (Demo)",
-          category: "IT Support",
-          desc: "Simulated Jira-style intake → triage → resolution with realistic ticket fields.",
-          tools: ["HTML", "CSS", "JS", "Firebase"],
-          links: { github: "#", live: "#" },
-          challenge:
-            "Many classmates only showed static lists. I wanted something that actually felt like a real Service Desk queue.",
-          approach:
-            "Designed a simple intake form with priority, category, and status, then wired it to Firebase so tickets persist and can be filtered.",
-          outcome:
-            "Helped me explain my support thinking during interviews — from triage, to escalation notes, to clean closures.",
-        },
-        {
-          id: "kb-hub",
-          title: "Knowledge Base Hub",
-          category: "IT Support",
-          desc: "Searchable internal docs inspired by UTS routines and KB workflows.",
-          tools: ["HTML", "Markdown", "LocalStorage"],
-          links: { github: "#", live: "#" },
-          challenge:
-            "KB links were often scattered across tools. I wanted a single, lightweight space to collect repeat fixes.",
-          approach:
-            "Structured articles by symptom, cause, and fix; added tagging and a simple search so analysts can find answers quickly.",
-          outcome:
-            "Turned messy notes into a browsable hub — showing how I think about reusability and support documentation.",
-        },
-        {
-          id: "net-monitor",
-          title: "Network Monitor Dashboard (Mockup)",
-          category: "IT Support",
-          desc: "Concept UI for ping/latency snapshots & network health tiles.",
-          tools: ["HTML", "CSS", "JS"],
-          links: { github: "#", live: "#" },
-          challenge:
-            "Non-technical users struggle to understand 'the network is slow'. I wanted a visual language for status.",
-          approach:
-            "Built cards that surface latency, status colours, and plain-language descriptions instead of just raw numbers.",
-          outcome:
-            "A talking piece for how I’d communicate technical network issues in a kinder, more visual way.",
-        },
-        {
-          id: "chaos-meter",
-          title: "Chaos Meter — Truth or Dare Overload",
-          category: "Advanced",
-          desc: "Neon truth-or-dare party game whose Chaos Meter escalates prompts for 2–10 players.",
-          tools: ["HTML", "CSS", "JS"],
-          links: {
-            github:
-              "https://github.com/Zynette/Chaos-Meter---Truth-or-Dare-Overload",
-            live: "https://zynette.github.io/Chaos-Meter---Truth-or-Dare-Overload/",
-          },
-          challenge:
-            "Wanted a multiplayer-ready truth-or-dare that felt reactive and cinematic enough for game nights and streams.",
-          approach:
-            "Built dynamic player chips, streak counters, and Chaos Meter tiers that unlock harder decks with responsive UI flourishes.",
-          outcome:
-            "Became my go-to demo for playful UX thinking and stateful vanilla JS that keeps sessions lively across devices.",
-        },
-        {
-          id: "dustless-living",
-          title: "Dustless Living Website",
-          category: "Web",
-          desc: "Real service business site with clearer copy, revamped SEO, and easier booking flow.",
-          tools: ["HTML", "CSS", "JS", "SEO"],
-          links: {
-            github: "https://github.com/Zynette/dustless-living-site",
-            live: "https://www.dustlessliving.com/",
-          },
-          challenge:
-            "My original cleaning service site felt generic and wasn’t converting — people couldn’t tell what made us different.",
-          approach:
-            "Rebuilt the layout with proof points, before/after visuals, and a friendlier inquiry form, then tightened SEO + local content.",
-          outcome:
-            "Saw ~35% more qualified leads within a month and way fewer ‘just curious’ inquiries because expectations were clearer.",
-        },
-        {
-          id: "pixora",
-          title: "Pixora Gallery Website",
-          category: "Web",
-          desc: "Firebase auth, storage, themes, and shareable public galleries.",
-          tools: ["HTML", "CSS", "JS", "Firebase"],
-          links: { github: "#", live: "#" },
-          challenge:
-            "I wanted a VSCO-style gallery without limits, where users can safely share and theme their own spaces.",
-          approach:
-            "Used Firebase Auth + Storage for uploads, Firestore for metadata, and custom themes so each gallery feels personal.",
-          outcome:
-            "A production-style project that stretched my knowledge of security rules, uploads, and UI polish.",
-        },
-        {
-          id: "aurora-weather",
-          title: "Aurora Weather — React Native",
-          category: "Web",
-          desc: "React Native weather app that hits geocoding + forecast APIs for quick hourly snapshots.",
-          tools: ["React Native", "JS", "Expo", "Open-Meteo"],
-          links: {
-            github: "https://github.com/Zynette/aurora-weather-reactnative",
-            live: "https://snack-web-player.s3.us-west-1.amazonaws.com/v2/54/index.html?initialUrl=exp%3A%2F%2Fu.expo.dev%2F933fd9c0-1666-11e7-afca-d980795c5824%3Fruntime-version%3Dexposdk%253A54.0.0%26channel-name%3Dproduction%26snack%3D%2540zynette%252Fhazardous-green-kiwi%26snack-channel%3DrtPJpU3B3R&origin=https%3A%2F%2Fsnack.expo.dev&verbose=false",
-          },
-          challenge:
-            "Wanted a weather tool that felt calmer and more informative than generic apps, especially for quick hourly planning.",
-          approach:
-            "Built search + geocoding, two hourly modes (temp-only vs temp + precipitation probability), recent-search chips, and graceful loading/error states in Expo.",
-          outcome:
-            "A polished theme that hits multiple API endpoints, shows meaningful hourly data, and proves I can ship React Native + Open-Meteo integrations.",
-        },
-        {
-          id: "focus-timer",
-          title: "Countdown Focus Timer",
-          category: "Web",
-          desc: "Pomodoro-style focus timer with light animations and UX details.",
-          tools: ["HTML", "CSS", "JS"],
-          links: {
-            github: "https://github.com/Zynette/CountdownTimer",
-            live: "https://zynette.github.io/CountdownTimer/",
-          },
-          challenge:
-            "Most focus timers feel either too plain or too complicated. I wanted something calm, playful, and useful.",
-          approach:
-            "Built preset focus blocks, subtle motion, and clear states for running, paused, and completed sessions.",
-          outcome:
-            "Friends actually used it for studying — a good sign that the UX felt intuitive and not distracting.",
-        },
-        {
-          id: "react-deck",
-          title: "Deck of Cards — Casino Felt Edition",
-          category: "Web",
-          desc: "React deck simulator with deal/draw/toss/shuffle and wildcard controls.",
-          tools: ["React", "JS", "HTML", "CSS"],
-          links: {
-            github: "https://github.com/Zynette/React-Deck",
-            live: "https://zynette.github.io/React-Deck/",
-          },
-          challenge:
-            "Wanted a playful way to practice React fundamentals that felt more tactile than a basic counter or todo list.",
-          approach:
-            "Built functional components with hooks, props, and event handlers to deal, draw, shuffle, and throw cards onto a felt-inspired UI.",
-          outcome:
-            "A compact React demo showing interactive state changes, a polished casino theme, and a live GitHub Pages deployment.",
-        },
-        {
-          id: "travel-time",
-          title: "Travel Time Website",
-          category: "Web",
-          desc: "Static travel landing page with hero sliders, feature cards, and destination highlights.",
-          tools: ["HTML", "CSS"],
-          links: {
-            github: "https://github.com/Zynette/Travel-Time-Website",
-            live: "https://zynette.github.io/Travel-Time-Website/",
-          },
-          challenge:
-            "Needed a simple but lively travel concept site that focused on story-driven copy and clean layout without heavy frameworks.",
-          approach:
-            "Designed a single-page flow with bold hero sections, curated imagery, and quick-hit info blocks tailored for weekend trip inspiration.",
-          outcome:
-            "A lightweight marketing page that showcases my ability to package visuals, copy, and responsive layout into one polished experience.",
-        },
-        {
-          id: "healthy-eating",
-          title: "Healthy Eating Landing Page",
-          category: "Web",
-          desc: "Clean HTML/CSS landing page encouraging healthy food habits with upbeat visuals.",
-          tools: ["HTML", "CSS"],
-          links: {
-            github: "https://github.com/Zynette/Healthy-Eating-Website",
-            live: "https://zynette.github.io/Healthy-Eating-Website/",
-          },
-          challenge:
-            "Practicing pure HTML/CSS meant finding ways to make a static health concept feel energetic without JavaScript.",
-          approach:
-            "Built a single-page layout with hero messaging, benefit cards, and ingredient imagery while keeping the typography bright and approachable.",
-          outcome:
-            "A bite-sized marketing page that shows I can tell a story with just markup, styling, and carefully chosen assets.",
-        },
-        {
-          id: "gradient-calc",
-          title: "Gradient Calculator",
-          category: "Web",
-          desc: "Pretty CSS gradient helper to match my aurora-style palettes.",
-          tools: ["HTML", "CSS", "JS"],
-          links: {
-            github: "https://github.com/Zynette/gradient-calculator",
-            live: "https://zynette.github.io/gradient-calculator/",
-          },
-          challenge:
-            "I kept manually tweaking gradients. I wanted a visual way to explore colours that still felt on brand.",
-          approach:
-            "Built sliders and presets that output ready-to-use CSS while matching softer, glassmorphism-friendly tones.",
-          outcome:
-            "Gave me a reusable tool for my own projects and a fun demo of UI + CSS creativity.",
-        },
-        {
-          id: "aspnet-crud",
-          title: "ASP.NET CRUD (Northwind)",
-          category: "Database",
-          desc: "EF Core CRUD, validation, and clean layering for a sample database.",
-          tools: ["C#", ".NET", "EF Core", "SQL"],
-          links: { github: "#", live: "#" },
-          challenge:
-            "It’s easy to get lost in scaffolding. I wanted to really understand what’s happening between UI, controllers, and DB.",
-          approach:
-            "Set up DbContext, proper models, and validation attributes, then documented the flow from HTTP request to SQL query.",
-          outcome:
-            "A clearer mental model for full-stack CRUD work I can bring into support, debugging, and future apps.",
-        },
-        {
-          id: "student-db",
-          title: "Student DB System",
-          category: "Database",
-          desc: "C++ + SQL system with access control and basic reporting.",
-          tools: ["C++", "SQL"],
-          links: { github: "#", live: "#" },
-          challenge:
-            "Storing records securely while keeping the interface simple for non-technical staff.",
-          approach:
-            "Implemented basic role-based access and structured queries for common admin tasks and reports.",
-          outcome:
-            "Showed that I can think about both security and usability at the data layer.",
-        },
-        {
-          id: "ask-antonette",
-          title: "Ask Antonette Bot (Concept)",
-          category: "Advanced",
-          desc: "Tiny Q&A-style concept trained on my IT notes & support patterns.",
-          tools: ["JS"],
-          links: { github: "#", live: "#" },
-          challenge:
-            "Co-op taught me that a lot of questions repeat. I wanted to imagine a tiny bot that reflects my style of answers.",
-          approach:
-            "Defined intents like 'VPN', 'password', 'MFA', and drafted human-sounding responses aligned with KB best practices.",
-          outcome:
-            "Helped me think about how automation can support — not replace — empathetic human IT support.",
-        },
-      ];
-    </script>
-    <!-- Case study modal I pop open for deeper dives -->
-    <div
-      id="caseModal"
-      class="modal-backdrop hidden"
-      aria-hidden="true"
-      role="dialog"
-      aria-modal="true"
-    >
-      <div class="modal glass">
-        <button
-          type="button"
-          class="modal-close"
-          id="caseClose"
-          aria-label="Close case study"
-        >
-          ✕
-        </button>
-        <h3 id="caseTitle"></h3>
-        <p id="caseMeta" class="muted small-text"></p>
-        <div class="modal-body">
-          <p>
-            <strong>Challenge.</strong>
-            <span id="caseChallenge"></span>
-          </p>
-          <p>
-            <strong>Approach.</strong>
-            <span id="caseApproach"></span>
-          </p>
-          <p>
-            <strong>Outcome.</strong>
-            <span id="caseOutcome"></span>
-          </p>
-        </div>
-        <div class="links" id="caseLinks"></div>
-      </div>
-    </div>
-    <script src="./script.js"></script>
   </body>
 </html>
