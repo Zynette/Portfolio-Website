@@ -98,7 +98,7 @@
           callback: (value) => {
             token = value;
             button.disabled = submitting;
-            say("Ready when you are.");
+            if (!status.dataset.state) say("Ready when you are.");
           },
           "expired-callback": () => {
             token = "";

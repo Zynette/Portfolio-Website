@@ -66,7 +66,7 @@ jobs:
         run: |
           set -euo pipefail
           for attempt in 1 2 3 4 5 6; do
-            if curl --fail --silent --show-error 'https://antonettepetallo.com/?release=${{ github.sha }}' | grep -q 'A DIFFERENT PERSPECTIVE'; then break; fi
+            if curl --fail --silent --show-error 'https://antonettepetallo.com/release.json?release=${{ github.sha }}' | node -e 'let b="";process.stdin.on("data",c=>b+=c);process.stdin.on("end",()=>{try{process.exit(JSON.parse(b).commit===process.env.GITHUB_SHA?0:1)}catch{process.exit(1)}})'; then break; fi
             if [ "$attempt" = 6 ]; then echo 'Domain does not yet serve this release'; exit 1; fi
             sleep 10
           done

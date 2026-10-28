@@ -168,7 +168,15 @@ for (const accepted of [true, false])
         "accepted your message",
       );
       await expect(page.getByLabel("Your name")).toHaveValue("");
+      await page.evaluate(() => window.testSecurity.callback("renewed-token"));
+      await expect(page.locator("#form-status")).toContainText(
+        "accepted your message",
+      );
     } else {
+      await expect(page.locator("#form-status")).toContainText(
+        "did not accept",
+      );
+      await page.evaluate(() => window.testSecurity.callback("renewed-token"));
       await expect(page.locator("#form-status")).toContainText(
         "did not accept",
       );
