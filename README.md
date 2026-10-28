@@ -1,10 +1,8 @@
-# Antonette Petallo — Clarity, by design
+# Antonette Petallo | Portfolio V3
 
-A framework-free professional portfolio connecting enterprise IT experience with practical independent software. The interface uses local IBM Plex Sans fonts, an ivory/ink/vermilion palette, source-based project visuals and a four-stage support walkthrough.
+A framework-free portfolio for Antonette's enterprise IT work and independent software projects. The visual identity uses plum, parchment and rose, self-hosted Cormorant Garamond and IBM Plex Sans, and an original vector ribbon with three keyboard-operable perspectives.
 
 ## Develop and check
-
-Node 24 is used in CI. Runtime delivery is static; no Node server or npm dependency runs in a visitor’s browser.
 
 ```sh
 npm ci
@@ -16,56 +14,28 @@ npm run test:browser
 npm run test:links
 ```
 
-Open `index.html` in a static preview, or serve `dist/` with your normal static host. In ChatGPT's managed environment, use `sites-preview start <absolute-checkout>`; no additional server is needed. The preview configuration is local and ignored by git.
+Node 24 is used in GitHub Actions. The browser tests exercise built files under a routed origin with representative headers. They test seven viewport widths, axe accessibility rules, reduced motion, keyboard navigation, disabled JavaScript and contact acceptance/failure boundaries. Stubbed provider tests do not prove email delivery. Production and inbox checks are separate.
 
-The browser suite loads the built files into Chromium through an intercepted static origin. It exercises real browser layout and interactions without an external server, tracking, live API or email delivery. It does not measure production network performance. The tests set the representative content headers and capture desktop/mobile screenshots in `docs/screenshots/`.
+In ChatGPT's managed environment use the existing `sites-preview` daemon with a checkout-local `.openai/hosting.json` whose static directory is `dist`. The static preview does not execute Cloudflare's Worker, so the contact service is unavailable there.
 
-## Content and architecture
+## Source map
 
-- `index.html`: professional positioning, selected work, process, experience and contact.
-- `work/*.html`: ordinary, shareable case-study documents with source/status/tradeoffs. No custom modal.
-- `styles.css`: shared tokens, layouts, print styles and responsive/reduced-motion rules.
-- `script.js`: progressive menu, filters, deterministic support walkthrough and optional email copy.
-- `resume.html`, `assets/Antonette-Petallo-Resume.pdf`: conservative current profile. HTML is the accessible primary alternative; the generated PDF is untagged.
-- `assets/`: local fonts, original accurate SVG diagrams, actual development screenshot, social image and résumé.
-- `scripts/build.mjs`: copies an explicit public allowlist to `dist/`. Documentation, source metadata, test files and npm configuration do not ship.
-- `tests/`: content/target checks and Playwright/axe checks. CI runs checks on pull requests and feature branch pushes.
+- `index.html`, `work/*.html`, `404.html`: static crawlable content and case studies.
+- `styles.css`, `script.js`: shared design system, responsive layouts, progressive navigation, ribbon perspective and private contact interaction.
+- `worker/contact.mjs`: Cloudflare advanced-mode Worker, same-origin contact validation, Turnstile verification, Resend adapter and unavailable-document responses.
+- `scripts/build.mjs`: allowlisted public output in `dist`, including `_worker.js` and a commit-specific `release.json`.
+- `.github/workflows/quality.yml`: feature branch and pull request checks.
+- `.github/workflows/production.yml`: main-branch checks, then Wrangler deployment to the existing `portfolio-website` Cloudflare Pages project and exact-commit domain verification.
+- `tests`: Node privacy/security checks and Playwright browser checks.
 
-Primary content, navigation, project links and email work without JavaScript. No account, form submission, analytics, storage, third-party font request or runtime framework is used. Contact is a direct email link; delivery depends on the visitor’s email app, and the site never claims a message was sent.
+No personal recipient address is present in frontend code. Secret values belong only in server-side hosting configuration. Runtime deployment credentials belong only in GitHub Actions secrets. Do not commit secrets or add a client-side mail recipient.
 
-## Update safely
+## Production setup
 
-Edit public copy directly in the HTML. Add or change a case study in `work/` and its entry in `index.html`; update `sitemap.xml`. Search includes rendered text plus each entry’s `data-search` keywords. The filter `data-category` is `implemented` or `concept`. Rebuild and test after edits. Keep the PDF and HTML profile in sync.
+Follow [deployment and contact setup](docs/DEPLOYMENT.md). The existing direct-upload Cloudflare project does not need a domain migration. Its one-time credentials and private mail settings must be configured before automatic publication and contact delivery can work. The owner authorized the requested redesign's publication after checks; account access is the remaining dependency.
 
-The support trace describes a fictional scenario. Do not replace it with confidential university incidents or screenshots. Use current repository evidence before changing any project’s status or adding outcome claims.
+Core content and project links work without JavaScript. Sending a message requires JavaScript for bot protection; LinkedIn remains an accessible alternative. Missing provider configuration disables sending with a truthful message. A successful UI response means the email provider accepted the message, not confirmed inbox arrival.
 
-Review [the audit](docs/AUDIT.md), [factual questions](docs/FACTUAL-REVIEW.md), [design decisions](docs/superpowers/specs/2026-10-28-portfolio-design.md) and [verification report](docs/REVIEW.md).
+Project maturity must remain evidence-based. University experience is public professional context; no university incidents, screenshots or confidential data should be added. Update the sitemap when adding a case study.
 
-## Publish only after owner approval
-
-This feature branch is intended for review, not automatic production deployment. Do not merge it until the owner approves the content and design.
-
-1. Review `docs/FACTUAL-REVIEW.md`, screenshots and the PR. Supply exact education details if you want complete credential lines.
-2. Verify the current hosting arrangement. The deployed HTML and `main` differed at audit time; adding `CNAME` alone does not establish that a provider will deploy the correct files.
-3. On the selected host, publish the contents of `dist/` as the site root. The root HTML/assets also support the existing static layout if the current hosting requires repository-root delivery. Prefer `dist/` to keep source-only files out of the served directory.
-4. Preserve `antonettepetallo.com` and HTTPS; verify DNS and the host’s domain binding before changing anything. Do not point the production domain at an unreviewed preview.
-5. `_headers` is provided for static hosts that recognise that format. GitHub Pages does **not** apply that file as response headers; configure equivalent policy at a supporting edge/host. Include a SHA-256 allowance for JSON-LD only if your chosen CSP implementation requires it; the JSON-LD is data, with no executable inline app code.
-6. After deployment, verify all project URLs, résumé download, fonts/images, 404 handling, canonical URLs, OG image, CSP/response headers and direct email on a real phone.
-7. Run a production mobile Lighthouse audit and collect real-user Core Web Vitals when traffic is available. No Lighthouse scores or field CWV are asserted by local tests.
-
-There is no deployment workflow in this change. Existing repository/domain history remains intact.
-
-## Review handoff
-
-The complete implementation is on `feat/editorial-systems-portfolio`. A source ZIP and a Git bundle are provided with the handoff. The ZIP contains source, documentation, test configuration and reviewed screenshots, without dependencies or secrets. The bundle preserves the original Git history and the new commits:
-
-```sh
-git clone --branch feat/editorial-systems-portfolio portfolio-feature-branch.bundle portfolio-review
-cd portfolio-review
-npm ci
-npm run build
-npm test
-npm run test:browser
-```
-
-Install Chromium first if needed with `npx playwright install chromium`. The owner authorised uploading this feature branch and opening a draft pull request. Production merge and publication still require separate approval. The existing production site remains unchanged.
+See [V3 design](docs/superpowers/specs/2026-10-28-v3-design.md), [verification status](docs/REVIEW-V3.md) and [remaining factual questions](docs/FACTUAL-REVIEW.md). Earlier audit/review files describe V2 and are retained as history, not the current publication instructions.

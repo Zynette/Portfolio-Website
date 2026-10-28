@@ -91,3 +91,74 @@ test("only provider acceptance produces success; failures stay errors", async ()
     globalThis.fetch = original;
   }
 });
+
+test("public config exposes only the Turnstile site key and static requests delegate", async () => {
+  const app = await worker();
+  const config = await app.fetch(
+    new Request("https://antonettepetallo.com/api/contact/config"),
+    { ...env, TURNSTILE_SITE_KEY: "public-site-key" },
+  );
+  assert.deepEqual(await config.json(), { siteKey: "public-site-key" });
+  assert.equal(config.headers.get("Cache-Control"), "no-store");
+  assert.equal(
+    (
+      await app.fetch(
+        new Request("https://antonettepetallo.com/no-such-page"),
+        { ASSETS: { fetch: () => new Response("Not found", { status: 404 }) } },
+      )
+    ).status,
+    404,
+  );
+});
+test("oversized, malformed and wrong-method requests never reach delivery", async () => {
+  const app = await worker();
+  assert.equal(
+    (await app.fetch(req({ ...payload, message: "x".repeat(13000) }), env))
+      .status,
+    413,
+  );
+  assert.equal(
+    (
+      await app.fetch(
+        new Request("https://antonettepetallo.com/api/contact", {
+          method: "POST",
+          headers: {
+            Origin: "https://antonettepetallo.com",
+            "Content-Type": "application/json",
+          },
+          body: "{not json",
+        }),
+        env,
+      )
+    ).status,
+    400,
+  );
+  assert.equal(
+    (
+      await app.fetch(
+        new Request("https://antonettepetallo.com/api/contact"),
+        env,
+      )
+    ).status,
+    405,
+  );
+});
+test("bot tokens from another hostname or action cannot send email", async () => {
+  const original = globalThis.fetch;
+  try {
+    for (const verified of [
+      { success: true, hostname: "other.example", action: "contact" },
+      { success: true, hostname: "antonettepetallo.com", action: "other" },
+    ]) {
+      let calls = 0;
+      globalThis.fetch = async () => {
+        calls++;
+        return Response.json(verified);
+      };
+      assert.equal((await (await worker()).fetch(req(), env)).status, 400);
+      assert.equal(calls, 1);
+    }
+  } finally {
+    globalThis.fetch = original;
+  }
+});

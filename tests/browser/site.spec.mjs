@@ -33,11 +33,19 @@ for (const width of widths)
     expect(bad).toEqual([]);
     await mkdir("docs/screenshots/v3", { recursive: true });
     await page.screenshot({ path: `docs/screenshots/v3/home-${width}.png` });
-    if ([390, 1440].includes(width))
+    if ([390, 1440].includes(width)) {
+      await page.locator(".help-preview img").scrollIntoViewIfNeeded();
+      await page
+        .locator(".help-preview img")
+        .evaluate((image) => image.decode());
+      await page.evaluate(() =>
+        window.scrollTo({ top: 0, behavior: "instant" }),
+      );
       await page.screenshot({
         path: `docs/screenshots/v3/full-${width}.png`,
         fullPage: true,
       });
+    }
   });
 test("signature perspective operates by keyboard and cycles deterministically", async ({
   page,
