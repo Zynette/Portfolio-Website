@@ -1,0 +1,210 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Aurora Weather — Antonette Petallo</title>
+    <meta
+      name="description"
+      content="A React Native learning project connecting city search to an hourly forecast through Open-Meteo."
+    />
+    <meta name="theme-color" content="#f3f1e9" />
+    <link
+      rel="canonical"
+      href="https://antonettepetallo.com/work/aurora-weather.html"
+    />
+    <meta property="og:type" content="article" />
+    <meta property="og:title" content="Aurora Weather — Antonette Petallo" />
+    <meta
+      property="og:description"
+      content="A React Native learning project connecting city search to an hourly forecast through Open-Meteo."
+    />
+    <meta
+      property="og:url"
+      content="https://antonettepetallo.com/work/aurora-weather.html"
+    />
+    <meta
+      property="og:image"
+      content="https://antonettepetallo.com/assets/social-preview.png"
+    />
+    <meta name="twitter:card" content="summary_large_image" />
+    <link rel="icon" href="../favicon.svg" type="image/svg+xml" />
+    <link rel="stylesheet" href="../styles.css" />
+    <script src="../script.js" defer></script>
+  </head>
+  <body id="top">
+    <a class="skip-link" href="#main">Skip to content</a>
+    <header class="site-header wrap">
+      <a class="brand" href="../index.html" aria-label="Antonette Petallo, home"
+        ><span class="monogram" aria-hidden="true">ap<span>↗</span></span
+        ><span>Antonette<br />Petallo</span></a
+      ><button
+        class="menu-toggle"
+        aria-expanded="false"
+        aria-controls="navigation"
+        hidden
+      >
+        Menu <span aria-hidden="true">+</span>
+      </button>
+      <nav id="navigation" aria-label="Main navigation">
+        <a href="../index.html#work">Work <span>01</span></a
+        ><a href="../index.html#approach">Approach <span>02</span></a
+        ><a href="../index.html#experience">Experience <span>03</span></a
+        ><a class="nav-contact" href="../index.html#contact"
+          >Let’s talk <span aria-hidden="true">↗</span></a
+        >
+      </nav>
+    </header>
+    <main id="main" class="wrap">
+      <div class="case-header">
+        <a class="back-link" href="../index.html#work"
+          ><span aria-hidden="true">←</span> Selected work</a
+        >
+        <div class="case-kicker">
+          <p class="eyebrow">02 / MOBILE & API INTEGRATION</p>
+          <span>ANTONETTE PETALLO</span>
+        </div>
+        <h1>Aurora Weather<span class="orange">.</span></h1>
+        <p class="case-deck">
+          A React Native learning project connecting city search to an hourly
+          forecast through Open-Meteo.
+        </p>
+        <dl class="case-facts">
+          <div>
+            <dt>Context & contribution</dt>
+            <dd>Independent learning project</dd>
+          </div>
+          <div>
+            <dt>Tools & methods</dt>
+            <dd>React Native, Expo, JavaScript, Open-Meteo</dd>
+          </div>
+          <div>
+            <dt>Current status</dt>
+            <dd>Source available · no app-store release claimed</dd>
+          </div>
+        </dl>
+      </div>
+      <figure class="case-art">
+        <img
+          src="../assets/weather-flow.svg"
+          alt="City query goes to geocoding, coordinates go to the forecast API, and hourly rows show temperature with optional precipitation."
+          width="1200"
+          height="650"
+        />
+        <figcaption>
+          Accurate flow from App.js. This diagram is not an application
+          screenshot or a live forecast.
+        </figcaption>
+      </figure>
+      <div class="case-content">
+        <section class="case-section">
+          <span class="section-index">01</span>
+          <div>
+            <h2>A city name is only the beginning.</h2>
+            <p>
+              The task is simple from a person’s point of view: search for a
+              city and see the weather. Underneath that interaction, the app
+              needs to disambiguate places, turn a selection into coordinates,
+              and request the right forecast data.
+            </p>
+            <p>
+              This learning project explores that sequence in React Native. The
+              source includes city search, recent-search chips, two hourly
+              display modes, and explicit loading and error states.
+            </p>
+          </div>
+        </section>
+        <section class="case-section">
+          <span class="section-index">02</span>
+          <div>
+            <h2>Connect two services through one choice.</h2>
+            <p>
+              A city query goes to Open-Meteo’s geocoding endpoint. Selecting a
+              result supplies latitude and longitude for the forecast endpoint.
+              Switching between temperature-only and
+              temperature-plus-precipitation changes the requested hourly
+              fields.
+            </p>
+            <ul>
+              <li>
+                React state separates city results, the selected place, forecast
+                rows and loading states.
+              </li>
+              <li>
+                FlatList renders hourly rows; Pressable and TextInput handle
+                selection and search.
+              </li>
+              <li>
+                Recent city queries stay in memory, with a maximum of eight
+                entries.
+              </li>
+              <li>
+                Network failures produce a readable message rather than an empty
+                result presented as success.
+              </li>
+            </ul>
+          </div>
+        </section>
+        <section class="case-section">
+          <span class="section-index">03</span>
+          <div>
+            <h2>Small choices expose useful tradeoffs.</h2>
+            <p>
+              Recent searches are session state, not persistent storage. That
+              keeps this exercise simple but means the list resets on reload.
+            </p>
+            <p>
+              The implementation takes the first 24 returned hourly values. It
+              does not yet select the next 24 hours from the current time.
+              Concurrent requests also need cancellation or stale-response
+              protection before I would rely on it as a production app.
+            </p>
+          </div>
+        </section>
+        <section class="case-section">
+          <span class="section-index">04</span>
+          <div>
+            <h2>A working code exercise, not a release claim.</h2>
+            <p>
+              The repository contains the Expo project and the API integration.
+              This portfolio’s review verified the source structure; it does not
+              establish native-device compatibility, current API reliability or
+              production readiness.
+            </p>
+            <div class="case-callout">
+              <p>
+                What this demonstrates: following data across endpoints,
+                managing asynchronous interface states, and being able to
+                explain the limitations of an implementation.
+              </p>
+            </div>
+          </div>
+        </section>
+        <div class="case-source">
+          <p>
+            Evidence reviewed · October 28, 2026<br />Public source; no
+            production outcome claimed.
+          </p>
+          <a
+            class="button dark"
+            href="https://github.com/Zynette/aurora-weather-reactnative"
+            target="_blank"
+            rel="noopener noreferrer"
+            >View source on GitHub <span aria-hidden="true">↗</span></a
+          >
+        </div>
+        <a class="next-project" href="./media-library.html"
+          ><span>NEXT IN THE SELECTION</span
+          ><strong>Media Library <span aria-hidden="true">↗</span></strong></a
+        >
+      </div>
+    </main>
+    <footer class="site-footer wrap">
+      <p>© <span id="year">2026</span> Antonette Petallo</p>
+      <p>Clarity, by design.</p>
+      <a href="../index.html#work"
+        >Back to work <span aria-hidden="true">↗</span></a
+      >
+    </footer>
+  </body>
+</html>

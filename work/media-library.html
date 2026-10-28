@@ -1,0 +1,207 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Media Library — Antonette Petallo</title>
+    <meta
+      name="description"
+      content="A C# coursework application exploring abstract classes, interfaces, file input and searchable media collections."
+    />
+    <meta name="theme-color" content="#f3f1e9" />
+    <link
+      rel="canonical"
+      href="https://antonettepetallo.com/work/media-library.html"
+    />
+    <meta property="og:type" content="article" />
+    <meta property="og:title" content="Media Library — Antonette Petallo" />
+    <meta
+      property="og:description"
+      content="A C# coursework application exploring abstract classes, interfaces, file input and searchable media collections."
+    />
+    <meta
+      property="og:url"
+      content="https://antonettepetallo.com/work/media-library.html"
+    />
+    <meta
+      property="og:image"
+      content="https://antonettepetallo.com/assets/social-preview.png"
+    />
+    <meta name="twitter:card" content="summary_large_image" />
+    <link rel="icon" href="../favicon.svg" type="image/svg+xml" />
+    <link rel="stylesheet" href="../styles.css" />
+    <script src="../script.js" defer></script>
+  </head>
+  <body id="top">
+    <a class="skip-link" href="#main">Skip to content</a>
+    <header class="site-header wrap">
+      <a class="brand" href="../index.html" aria-label="Antonette Petallo, home"
+        ><span class="monogram" aria-hidden="true">ap<span>↗</span></span
+        ><span>Antonette<br />Petallo</span></a
+      ><button
+        class="menu-toggle"
+        aria-expanded="false"
+        aria-controls="navigation"
+        hidden
+      >
+        Menu <span aria-hidden="true">+</span>
+      </button>
+      <nav id="navigation" aria-label="Main navigation">
+        <a href="../index.html#work">Work <span>01</span></a
+        ><a href="../index.html#approach">Approach <span>02</span></a
+        ><a href="../index.html#experience">Experience <span>03</span></a
+        ><a class="nav-contact" href="../index.html#contact"
+          >Let’s talk <span aria-hidden="true">↗</span></a
+        >
+      </nav>
+    </header>
+    <main id="main" class="wrap">
+      <div class="case-header">
+        <a class="back-link" href="../index.html#work"
+          ><span aria-hidden="true">←</span> Selected work</a
+        >
+        <div class="case-kicker">
+          <p class="eyebrow">03 / SOFTWARE FUNDAMENTALS</p>
+          <span>ANTONETTE PETALLO</span>
+        </div>
+        <h1>Media Library<span class="orange">.</span></h1>
+        <p class="case-deck">
+          A C# coursework application exploring abstract classes, interfaces,
+          file input and searchable media collections.
+        </p>
+        <dl class="case-facts">
+          <div>
+            <dt>Context & contribution</dt>
+            <dd>Coursework · C# implementation</dd>
+          </div>
+          <div>
+            <dt>Tools & methods</dt>
+            <dd>C#, .NET Framework, text-file input</dd>
+          </div>
+          <div>
+            <dt>Current status</dt>
+            <dd>Educational console project · source available</dd>
+          </div>
+        </dl>
+      </div>
+      <figure class="case-art">
+        <img
+          src="../assets/media-model.svg"
+          alt="An abstract Media class implements ISearchable. Book, Movie and Song inherit from Media; Book and Movie also implement IEncryptable."
+          width="1200"
+          height="650"
+        />
+        <figcaption>
+          Class model verified against the public C# source. No application UI
+          is fabricated.
+        </figcaption>
+      </figure>
+      <div class="case-content">
+        <section class="case-section">
+          <span class="section-index">01</span>
+          <div>
+            <h2>One collection, different kinds of object.</h2>
+            <p>
+              Books, movies and songs share a title and year, but each has its
+              own fields. The exercise is to give those differences a clear
+              structure while keeping listing and searching understandable.
+            </p>
+            <p>
+              The console application loads records from a text file, groups
+              them by type, and searches across titles. It is a contained
+              coursework example rather than a deployed product.
+            </p>
+          </div>
+        </section>
+        <section class="case-section">
+          <span class="section-index">02</span>
+          <div>
+            <h2>Put shared behaviour in the right place.</h2>
+            <p>
+              An abstract Media class holds shared properties and implements
+              ISearchable with a case-insensitive title search. Book, Movie and
+              Song provide their own details.
+            </p>
+            <p>
+              Book and Movie also implement IEncryptable. Keeping that contract
+              separate demonstrates that a capability can apply to some types
+              without forcing it onto every media object.
+            </p>
+            <ul>
+              <li>File.ReadAllLines reads the source records.</li>
+              <li>The parser creates typed objects from the text records.</li>
+              <li>
+                A menu supports type-specific listings, a full listing and title
+                search.
+              </li>
+              <li>
+                Invalid menu input receives a clear prompt rather than being
+                assumed valid.
+              </li>
+            </ul>
+          </div>
+        </section>
+        <section class="case-section">
+          <span class="section-index">03</span>
+          <div>
+            <h2>Name the security limitation precisely.</h2>
+            <p>
+              The IEncryptable implementation uses ROT13 to transform summaries.
+              ROT13 is a reversible educational substitution, not secure
+              encryption. This project does not demonstrate secure storage of
+              sensitive information.
+            </p>
+            <p>
+              The repository also includes compiled and generated files. A
+              cleaner next iteration would ignore build output, add parser tests
+              and handle malformed records deliberately.
+            </p>
+          </div>
+        </section>
+        <section class="case-section">
+          <span class="section-index">04</span>
+          <div>
+            <h2>Small enough to explain completely.</h2>
+            <p>
+              The value of this project is the relationship between its parts:
+              inheritance for shared structure, an interface for a common
+              operation, and another interface for an optional capability.
+            </p>
+            <div class="case-callout">
+              <p>
+                What this demonstrates: reading and reasoning about
+                object-oriented code, choosing contracts, and recognising the
+                difference between a learning technique and a production
+                security control.
+              </p>
+            </div>
+          </div>
+        </section>
+        <div class="case-source">
+          <p>
+            Evidence reviewed · October 28, 2026<br />Public source; no
+            production outcome claimed.
+          </p>
+          <a
+            class="button dark"
+            href="https://github.com/Zynette/Media-Management-Console-Application"
+            target="_blank"
+            rel="noopener noreferrer"
+            >View source on GitHub <span aria-hidden="true">↗</span></a
+          >
+        </div>
+        <a class="next-project" href="./careeros.html"
+          ><span>NEXT IN THE SELECTION</span
+          ><strong>CareerOS <span aria-hidden="true">↗</span></strong></a
+        >
+      </div>
+    </main>
+    <footer class="site-footer wrap">
+      <p>© <span id="year">2026</span> Antonette Petallo</p>
+      <p>Clarity, by design.</p>
+      <a href="../index.html#work"
+        >Back to work <span aria-hidden="true">↗</span></a
+      >
+    </footer>
+  </body>
+</html>

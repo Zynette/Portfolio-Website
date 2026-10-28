@@ -1,0 +1,225 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Online Technical Help — Antonette Petallo</title>
+    <meta
+      name="description"
+      content="A remote-support website that turns an open-ended tech problem into a clearer, scoped request."
+    />
+    <meta name="theme-color" content="#f3f1e9" />
+    <link
+      rel="canonical"
+      href="https://antonettepetallo.com/work/online-technical-help.html"
+    />
+    <meta property="og:type" content="article" />
+    <meta
+      property="og:title"
+      content="Online Technical Help — Antonette Petallo"
+    />
+    <meta
+      property="og:description"
+      content="A remote-support website that turns an open-ended tech problem into a clearer, scoped request."
+    />
+    <meta
+      property="og:url"
+      content="https://antonettepetallo.com/work/online-technical-help.html"
+    />
+    <meta
+      property="og:image"
+      content="https://antonettepetallo.com/assets/social-preview.png"
+    />
+    <meta name="twitter:card" content="summary_large_image" />
+    <link rel="icon" href="../favicon.svg" type="image/svg+xml" />
+    <link rel="stylesheet" href="../styles.css" />
+    <script src="../script.js" defer></script>
+  </head>
+  <body id="top">
+    <a class="skip-link" href="#main">Skip to content</a>
+    <header class="site-header wrap">
+      <a class="brand" href="../index.html" aria-label="Antonette Petallo, home"
+        ><span class="monogram" aria-hidden="true">ap<span>↗</span></span
+        ><span>Antonette<br />Petallo</span></a
+      ><button
+        class="menu-toggle"
+        aria-expanded="false"
+        aria-controls="navigation"
+        hidden
+      >
+        Menu <span aria-hidden="true">+</span>
+      </button>
+      <nav id="navigation" aria-label="Main navigation">
+        <a href="../index.html#work">Work <span>01</span></a
+        ><a href="../index.html#approach">Approach <span>02</span></a
+        ><a href="../index.html#experience">Experience <span>03</span></a
+        ><a class="nav-contact" href="../index.html#contact"
+          >Let’s talk <span aria-hidden="true">↗</span></a
+        >
+      </nav>
+    </header>
+    <main id="main" class="wrap">
+      <div class="case-header">
+        <a class="back-link" href="../index.html#work"
+          ><span aria-hidden="true">←</span> Selected work</a
+        >
+        <div class="case-kicker">
+          <p class="eyebrow">01 / SERVICE DESIGN & DEVELOPMENT</p>
+          <span>ANTONETTE PETALLO</span>
+        </div>
+        <h1>Online Technical Help<span class="orange">.</span></h1>
+        <p class="case-deck">
+          A remote-support website that turns an open-ended tech problem into a
+          clearer, scoped request.
+        </p>
+        <dl class="case-facts">
+          <div>
+            <dt>Context & contribution</dt>
+            <dd>Independent service project · AI-assisted development</dd>
+          </div>
+          <div>
+            <dt>Tools & methods</dt>
+            <dd>HTML, CSS, JavaScript, Node.js</dd>
+          </div>
+          <div>
+            <dt>Current status</dt>
+            <dd>Implementation in repository; public launch pending</dd>
+          </div>
+        </dl>
+      </div>
+      <figure class="case-art">
+        <img
+          src="../assets/online-technical-help.webp"
+          alt="Online Technical Help homepage with separate tech-help and website navigation, remote support introduction and an illustrative support panel."
+          width="1280"
+          height="550"
+        />
+        <figcaption>
+          Actual homepage capture from the public repository’s development
+          build. Cropped to the opening viewport; public launch remains pending.
+        </figcaption>
+      </figure>
+      <figure class="case-art">
+        <img
+          src="../assets/help-flow.svg"
+          alt="Support intake flow: service question, request validation, delivery adapter and confirmed provider acceptance."
+          width="1200"
+          height="650"
+        />
+        <figcaption>
+          Source-derived architecture. Delivery is not configured for public
+          use.
+        </figcaption>
+      </figure>
+      <div class="case-content">
+        <section class="case-section">
+          <span class="section-index">01</span>
+          <div>
+            <h2>Make the first step easier.</h2>
+            <p>
+              People asking for tech help do not always know which service they
+              need. A general question, a request for an appointment, and a
+              website project need different information.
+            </p>
+            <p>
+              This project separates those paths while keeping the service
+              remote-only and the next step understandable. My focus is the
+              service scope, request flow and clear expectations; AI tools
+              assist the implementation and iteration.
+            </p>
+          </div>
+        </section>
+        <section class="case-section">
+          <span class="section-index">02</span>
+          <div>
+            <h2>A small backend for a specific reason.</h2>
+            <p>
+              The interface uses semantic HTML, CSS and browser JavaScript. A
+              Node HTTP server validates requests and provides a delivery
+              adapter. That backend is useful here because a browser alone
+              cannot enforce request limits or protect the delivery flow.
+            </p>
+            <ul>
+              <li>
+                Separate inquiry, booking and website-project flows collect
+                information suited to the request.
+              </li>
+              <li>
+                Validation, a honeypot, payload limits and request throttling
+                sit at the server boundary.
+              </li>
+              <li>
+                A provider must explicitly accept a request before the interface
+                reports success.
+              </li>
+              <li>
+                Missing delivery configuration returns an honest unavailable
+                state and preserves the visitor’s input.
+              </li>
+            </ul>
+          </div>
+        </section>
+        <section class="case-section">
+          <span class="section-index">03</span>
+          <div>
+            <h2>A request is not a confirmed appointment.</h2>
+            <p>
+              Preferred dates and times are requests. They do not automatically
+              create a booking. There is no connected calendar, payment
+              processing or promise of an immediate response.
+            </p>
+            <p>
+              Throttling is currently stored in process memory. Hosting behind a
+              proxy or running multiple instances needs an appropriate trusted
+              client-IP or edge limit strategy before public launch.
+            </p>
+          </div>
+        </section>
+        <section class="case-section">
+          <span class="section-index">04</span>
+          <div>
+            <h2>Implemented, with a clear launch boundary.</h2>
+            <p>
+              The public repository includes the service interface, server,
+              validation and automated checks. Form-provider verification,
+              actual inbox delivery and production hosting are still
+              outstanding. I am not presenting this as a launched service
+              platform.
+            </p>
+            <div class="case-callout">
+              <p>
+                What this demonstrates: translating a real service into distinct
+                workflows, defining honest states, and considering what has to
+                happen beyond the interface.
+              </p>
+            </div>
+          </div>
+        </section>
+        <div class="case-source">
+          <p>
+            Evidence reviewed · October 28, 2026<br />Public source; no
+            production outcome claimed.
+          </p>
+          <a
+            class="button dark"
+            href="https://github.com/Zynette/HamiltonTechHelp"
+            target="_blank"
+            rel="noopener noreferrer"
+            >View source on GitHub <span aria-hidden="true">↗</span></a
+          >
+        </div>
+        <a class="next-project" href="./aurora-weather.html"
+          ><span>NEXT IN THE SELECTION</span
+          ><strong>Aurora Weather <span aria-hidden="true">↗</span></strong></a
+        >
+      </div>
+    </main>
+    <footer class="site-footer wrap">
+      <p>© <span id="year">2026</span> Antonette Petallo</p>
+      <p>Clarity, by design.</p>
+      <a href="../index.html#work"
+        >Back to work <span aria-hidden="true">↗</span></a
+      >
+    </footer>
+  </body>
+</html>
