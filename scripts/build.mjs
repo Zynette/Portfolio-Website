@@ -17,7 +17,6 @@ for (const entry of [
   "robots.txt",
   "sitemap.xml",
   "_headers",
-  "CNAME",
   ".nojekyll",
 ]) {
   await cp(entry, `dist/${entry}`, { recursive: true });
